@@ -1,0 +1,61 @@
+@import url("reset.css");
+
+/*Fonts*/
+.c {
+	text-align:center;
+}
+
+.b {
+	vertical-align: baseline;
+	font-weight:bold;
+}
+
+.i {
+	vertical-align: baseline;
+	font-style: italic;
+}
+
+/* Title Bar */
+#titlewrap {
+	height:100px;
+	background-color:#000;
+}
+
+#titleleft, #titlecenter, #titleright{
+	float:left;
+	display:inline-block;
+	position:relative;
+	height:100%;
+	margin:0px;
+}
+
+#titleleft {
+	background-color:#00FF00;
+	width:200px;
+}
+
+#titlecenter {
+	background-color:#0000FF;
+	margin:auto;
+	width:1000px;
+	font-size:25px;
+
+	text-align:center;
+}
+
+#titlecenter span a {
+	color:#0F0;
+	vertical-align: text-bottom;
+	position: relative;
+	text-decoration:none;
+}
+
+#titleright {
+	background-color:#00FF00;
+	width:200px;
+}
+
+/*Navigation Bar*/
+nav {
+	width:100%;
+}
