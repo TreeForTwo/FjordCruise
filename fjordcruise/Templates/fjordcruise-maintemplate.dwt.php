@@ -18,6 +18,7 @@
 		$( document ).ready(
 			function () {
 				ResizeTitle()
+				CenterNav()
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 			}
 		);
@@ -25,6 +26,7 @@
 		$( window ).resize(
 			function () {
 				ResizeTitle()
+				CenterNav()
 			}
 		);
 	</script>
@@ -45,6 +47,16 @@
 			</div>
 		</div>
 
+		<!-- Navigation -->
+		<div id="navwrap">
+			<ul id="testshit">
+				<li><a href="index.php">Åkrafjorden</a></li>
+				<li><a href="index.php">Cruise</a></li>
+				<li><a href="index.php">Aktiviteter</a></li>
+				<li><a href="index.php">Spesial</a></li>
+				<li><a href="index.php">Informasjon</a></li>
+			</ul>
+		</div>
 	</nav>
 
 </body>

@@ -15,6 +15,11 @@
 	font-style: italic;
 }
 
+/* Header */
+nav {
+	width:100%;
+}
+
 /* Title Bar */
 #titlewrap {
 	height:100px;
@@ -56,6 +61,36 @@
 }
 
 /*Navigation Bar*/
-nav {
+#navwrap {
 	width:100%;
+	float:left;
+	background-color:#AAA;
+	position:relative;
+}
+
+#navwrap ul {
+	float:left;
+}
+
+#navwrap ul li {
+	float:left;
+	background-color:#F00;
+}
+
+#navwrap ul li a {
+	display:block;
+	padding:12px 22px;
+
+	border-right:2px solid #000;
+	border-top:2px solid #000;
+	border-bottom:2px solid #000;
+
+	font-size:22px;
+
+	text-decoration:none;
+	text-align:center;
+}
+
+#navwrap ul li:first-child a {
+	border-left:2px solid #000;
 }
