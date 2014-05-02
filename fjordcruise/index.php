@@ -55,11 +55,11 @@
 		<!-- Navigation -->
 		<div id="navwrap">
 			<ul>
-				<li><a href="index.php">Åkrafjorden</a></li>
-				<li><a href="index.php">Cruise</a></li>
-				<li><a href="index.php">Aktiviteter</a></li>
-				<li><a href="index.php">Informasjon</a></li>
-				<li id="paalogging"><a href="index.php">Pålogging</a></li>
+				<li><a href="aakrafjorden.php">Åkrafjorden</a></li>
+				<li><a href="cruise.php">Cruise</a></li>
+				<li><a href="aktiviteter.php">Aktiviteter</a></li>
+				<li><a href="omoss.php">Informasjon</a></li>
+				<li id="paalogging"><a href="paalogging.php">Pålogging</a></li>
 			</ul>
 		</div>
 	</nav>
