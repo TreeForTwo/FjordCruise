@@ -13,3 +13,9 @@ function CenterNav() {
 	$("#navwrap ul").css("margin-left", newmargin + 'px');
 	$("#navwrap").width(newwidth);
 }
+
+function ScaleContent() {
+	var newwidth = $(window).width();
+	var contentwidth = Math.max( $(window).width() * 0.15 + 600, 700 )
+	$("#contentwrap").width(contentwidth);
+}

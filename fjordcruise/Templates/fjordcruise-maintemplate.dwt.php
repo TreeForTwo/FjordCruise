@@ -14,12 +14,16 @@
 	<script src="../js/jquery.js"></script>
 	<script src="../js/jquery.scalewindow.js"></script>
 	<script src="../js/jquery.fittext.js"></script>
+	<script src="../js/jquery.flowtype.js"></script>	
 	<script>
 		$( document ).ready(
 			function () {
 				ResizeTitle()
 				CenterNav()
+				ScaleContent()
+				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
+				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
 			}
 		);
 
@@ -27,6 +31,7 @@
 			function () {
 				ResizeTitle()
 				CenterNav()
+				ScaleContent()
 			}
 		);
 	</script>
@@ -53,8 +58,8 @@
 				<li><a href="index.php">Åkrafjorden</a></li>
 				<li><a href="index.php">Cruise</a></li>
 				<li><a href="index.php">Aktiviteter</a></li>
-				<li><a href="index.php">Spesial</a></li>
 				<li><a href="index.php">Informasjon</a></li>
+				<li id="paalogging"><a href="index.php">Pålogging</a></li>
 			</ul>
 		</div>
 	</nav>
