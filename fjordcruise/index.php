@@ -1,19 +1,19 @@
 <!doctype html>
-<html>
+<html><!-- InstanceBegin template="/Templates/fjordcruise-maintemplate.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="../css/main.css">
-<!-- TemplateBeginEditable name="doctitle" -->
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<!-- InstanceBeginEditable name="doctitle" -->
 <title>FjordCruise</title>
-<!-- TemplateEndEditable -->
-<!-- TemplateBeginEditable name="head" -->
-<!-- TemplateEndEditable -->
+<!-- InstanceEndEditable -->
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
 </head>
 
 <body>
-	<script src="../js/jquery.js"></script>
-	<script src="../js/jquery.scalewindow.js"></script>
-	<script src="../js/jquery.fittext.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="js/jquery.scalewindow.js"></script>
+	<script src="js/jquery.fittext.js"></script>
 	<script>
 		$( document ).ready(
 			function () {
@@ -59,12 +59,12 @@
 		</div>
 	</nav>
 
-	<!-- TemplateBeginEditable name="EditRegion2" --><!-- TemplateEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
-			<!-- TemplateBeginEditable name="EditRegion3" --><!-- TemplateEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" -->stuff<!-- InstanceEndEditable -->
 		</span>
 	</div>
 </body>
-</html>
+<!-- InstanceEnd --></html>

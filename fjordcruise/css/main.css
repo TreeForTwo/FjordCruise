@@ -24,19 +24,22 @@ nav {
 #titlewrap {
 	height:100px;
 	background-color:#000;
+	display:block;
+	width:1300px;
 }
 
 #titleleft, #titlecenter, #titleright{
 	float:left;
-	display:inline-block;
+	display:block;
 	position:relative;
 	height:100%;
 	margin:0px;
+
 }
 
 #titleleft {
 	background-color:#00FF00;
-	width:200px;
+	width:150px;
 }
 
 #titlecenter {
@@ -57,7 +60,7 @@ nav {
 
 #titleright {
 	background-color:#00FF00;
-	width:200px;
+	width:150px;
 }
 
 /*Navigation Bar*/
