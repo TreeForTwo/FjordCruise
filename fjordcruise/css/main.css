@@ -42,7 +42,7 @@ nav {
 
 #titleleft {
 	background-color:#00FF00;
-	width:150px;
+	width:200px;
 }
 
 #titlecenter {
@@ -63,7 +63,7 @@ nav {
 
 #titleright {
 	background-color:#00FF00;
-	width:150px;
+	width:200px;
 }
 
 
@@ -109,8 +109,35 @@ nav {
 	width:700px;
 	margin-left:auto;
 	margin-right:auto;
-	padding: 0px 12px 5px 12px;
+	padding: 10px 15px 10px 15px;
 }
 
 #content {
+	display:block;
+}
+
+/* Cruise Tables */
+.cruisetable {
+	width:100%;
+	border-collapse: collapse;
+
+	margin-bottom:20px;
+}
+
+.cruisetable th, td {
+	border:2px solid #000;
+}
+
+.cruisetable th {
+	padding:8px;
+
+	background-color:rgba(0, 0, 0, 0.15);
+}
+
+.cruisetable td {
+	padding:6px 5px 6px 10px;
+}
+
+.cruisetable tr:last-child td {
+	width:25%;
 }

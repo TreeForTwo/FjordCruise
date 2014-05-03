@@ -1,7 +1,7 @@
 <!doctype html>
 <html><!-- InstanceBegin template="/Templates/fjordcruise-maintemplate.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<meta charset="utf-8">
+<meta charset="iso-8859-1">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!-- InstanceBeginEditable name="doctitle" -->
 <title>FjordCruise</title>
@@ -36,6 +36,15 @@
 		);
 	</script>
 
+	<?php
+
+	$serverhost="p:localhost";
+	$serveruser="root";
+	$serverpass="";
+	$serverschema="maro0211"
+
+	?>
+
 	<nav>
 		<!-- Titlebar -->
 		<div id="titlewrap">
@@ -55,11 +64,11 @@
 		<!-- Navigation -->
 		<div id="navwrap">
 			<ul>
-				<li><a href="aakrafjorden.php">Ã…krafjorden</a></li>
+				<li><a href="aakrafjorden.php">Åkrafjorden</a></li>
 				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
-				<li id="paalogging"><a href="paalogging.php">PÃ¥logging</a></li>
+				<li id="paalogging"><a href="paalogging.php">Pålogging</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -68,6 +77,7 @@
 
 	<div id="contentwrap">
 		<span id="content">
+			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
 
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc congue nisi non nulla dapibus ullamcorper. Praesent sed tellus sit amet est tristique malesuada. Suspendisse a lacus dictum libero dignissim aliquam sed ut mauris. Sed ut cursus quam, vel facilisis nulla. Nulla nec velit commodo ante volutpat egestas. Suspendisse arcu turpis, ultricies vitae elit id, consectetur pretium erat. Vestibulum in dignissim lectus. Ut viverra in urna eget semper. Aliquam tempus est felis, quis posuere tortor eleifend at. Mauris vehicula ac nunc ac rutrum. Aenean pharetra lectus tincidunt, sagittis eros vel, feugiat libero.

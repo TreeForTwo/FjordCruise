@@ -1,5 +1,5 @@
 function ResizeTitle() {
-	var mintitlewidth = 450
+	var mintitlewidth = 350
       var newwidth = $(window).width(); 
       var titlewidth = Math.max( newwidth - $("#titleleft").width() - $("#titleright").width(), mintitlewidth);
       newwidth = Math.max( newwidth, titlewidth + $("#titleleft").width() + $("#titleright").width() );
@@ -16,6 +16,7 @@ function CenterNav() {
 
 function ScaleContent() {
 	var newwidth = $(window).width();
-	var contentwidth = Math.max( $(window).width() * 0.15 + 600, 700 )
-	$("#contentwrap").width(contentwidth);
+	var wrapwidth = Math.max( $(window).width() * 0.15 + 600, 700 )
+	$("#contentwrap").width(wrapwidth);
+	$("#content").width( wrapwidth );
 }
