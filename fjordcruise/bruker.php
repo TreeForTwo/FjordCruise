@@ -173,11 +173,47 @@
 	      									<input type='hidden' name='profilid' value='" . $_GET['profil'] . "'>
 	      								</tr>
 	      							</table>
-	      						</form>
+	      						</form>";
 
-	      						<hr>
+	      						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
+	      										FROM fjordcruise_bestillinger, fjordcruise_baater, fjordcruise_turer, fjordcruise_profil, fjordcruise_avganger
+	      										WHERE fjordcruise_bestillinger.avgangid = fjordcruise_avganger.avgangid
+	      										AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid
+	      										AND fjordcruise_avganger.turid = fjordcruise_turer.turid
+	      										AND fjordcruise_bestillinger.profilid = " . $_GET['profil'] . "
+	      										AND fjordcruise_profil.profilid = " . $_GET['profil'];
 
-	      						<h1>Reservasjoner</h1><br>";
+	      						$reservationarray = mysqli_query($con, $reservationsentence);
+
+	      						if ( mysqli_num_rows($reservationarray) ) {
+		      						echo "<hr>
+		      							<h1>Reservasjoner</h1><br><div id='reservationwrap'>";
+
+		      						while( $reservations = mysqli_fetch_array($reservationarray) ) {
+		      							echo "<table class='reservationtable'>
+		      									<tr>
+		      										<th colspan='2'>" . $reservations['turnavn'] . "</th>
+		      									</tr>
+		      									<tr>
+		      										<td colspan='2'>" . $reservations['fornavn'] . " " . $reservations['etternavn'] . "</td>
+		      									</tr>
+		      									<tr>
+		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter.</td>
+		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter.</td>
+		      									</tr>
+		      									<tr>
+		      										<td>" . $reservations['bestiltdato'] . "</td>
+		      										<td>" . $reservations['baatnavn'] . "</td>
+		      									</tr>
+		      								</table>";
+		      						}
+
+		      						echo "</div>";
+		      					}
+		      					else {
+		      						echo "Found no reservations.";
+		      					}
+
 	      				}
 	      				else {
 	      					//panic
