@@ -124,7 +124,7 @@ nav {
 	margin-bottom:20px;
 }
 
-.cruisetable th, td {
+.cruisetable th, .cruisetable td {
 	border:2px solid #000;
 }
 
@@ -138,6 +138,12 @@ nav {
 	padding:6px 5px 6px 10px;
 }
 
-.cruisetable tr:last-child td {
+.cruisetable tr td:last-child {
 	width:25%;
+}
+
+/* Admin Button Table */
+#admintable tr td {
+	width:33%;
+	text-align:center;
 }

@@ -69,7 +69,7 @@
 				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
-				<li id="paalogging"><a href="bruker.php">Pålogging</a></li>
+				<li id="paalogging"><a href="bruker.php">Bruker</a></li>
 			</ul>
 		</div>
 	</nav>

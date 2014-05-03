@@ -74,26 +74,12 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" -->
-
-	<script>
-		if ( readCookie('profil') ) {
-			window.paaloggetprofil = readCookie('profil');
-		}
-		else {
-			createCookie('previouspage', window.location.href);
-			window.location.replace('paalogging.php');
-		}
-	</script>
-
-	<!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
-
-
 
 			<!-- InstanceEndEditable -->
 		</span>
