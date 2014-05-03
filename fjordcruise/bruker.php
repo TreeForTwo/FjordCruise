@@ -135,7 +135,7 @@
 	      								<tr>
 	      									<td><font class='b'>E-Post:</font></td>
 	      									<td>" . $row['epost'] . "</td>
-	      									<td><input name='epost' type='text' value='" . $row['fornavn'] . "'></td>
+	      									<td><input name='epost' type='text' value='" . $row['epost'] . "'></td>
 	      								</tr>
 	      								<tr>
 	      									<td><font class='b'>Fornavn</font></td>
@@ -170,6 +170,7 @@
 	      								<tr>
 	      									<td colspan='3'><input value='Endre registrerte verdier' type='submit' onclick='createCookie(&#39;previouspage&#39;,window.location.href)'></td>
 	      									<input type='hidden' name='omregistrasjon' value='1'>
+	      									<input type='hidden' name='profilid' value='" . $_GET['profil'] . "'>
 	      								</tr>
 	      							</table>
 	      						</form>
