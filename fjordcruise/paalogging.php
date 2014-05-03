@@ -14,7 +14,8 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.scalewindow.js"></script>
 	<script src="js/jquery.fittext.js"></script>
-	<script src="js/jquery.flowtype.js"></script>	
+	<script src="js/jquery.flowtype.js"></script>
+	<script src="js/cookies.js"></script>
 	<script>
 		$( document ).ready(
 			function () {
@@ -68,17 +69,41 @@
 				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
-				<li id="paalogging"><a href="paalogging.php">Pålogging</a></li>
+				<li id="paalogging"><a href="bruker.php">Pålogging</a></li>
 			</ul>
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" -->
+
+	<script>
+
+		if (readCookie('profil') && readCookie('previouspage')) {
+			window.location.replace(readCookie('previouspage'));
+		}
+		else if (readCookie('profil')) {
+			window.location.replace('bruker.php');
+		}
+
+	</script>
+
+	<!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
-			<!-- InstanceBeginEditable name="EditRegion3" --><!-- InstanceEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" -->
+
+			<form action='submit_paalogging.php' method='post'>
+				<font class='b'>Brukernavn:</font><br>
+				<input type='text' name='brukernavn'><br>
+				<font class='b'>Passord:</font><br>
+				<input type='password' name='passord'><br>
+				<input type='submit' value='Logg inn'>
+			</form>
+
+
+			<!-- InstanceEndEditable -->
 		</span>
 	</div>
 </body>

@@ -69,13 +69,13 @@
 				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
-				<li id="paalogging"><a href="bruker.php">Pålogging</a></li>
+				<li id="paalogging"><a href="paalogging.php">Pålogging</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<!-- InstanceBeginEditable name="EditRegion2" -->
-
+	
 	<script>
 		if ( readCookie('profil') ) {
 			window.paaloggetprofil = readCookie('profil');
@@ -92,8 +92,6 @@
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
-
-
 
 			<!-- InstanceEndEditable -->
 		</span>

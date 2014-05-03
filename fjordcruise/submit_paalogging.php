@@ -74,26 +74,43 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" -->
-
-	<script>
-		if ( readCookie('profil') ) {
-			window.paaloggetprofil = readCookie('profil');
-		}
-		else {
-			createCookie('previouspage', window.location.href);
-			window.location.replace('paalogging.php');
-		}
-	</script>
-
-	<!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
 
+			<?php
+				if (@!$con=mysqli_connect($serverhost, $serveruser, $serverpass, $serverschema)){
+	            		echo "<h3>MySQL-serveren er ikke tilgjengelig nå. Last inn nettsiden på nytt, eller prøv igjen senere.</h3>";
+	            		exit;
+	      		}
 
+	      		$sqlstatement =  "SELECT fjordcruise_profil.profilid
+	      					FROM fjordcruise_profil
+	      					WHERE ( fjordcruise_profil.epost = '" . $_POST['brukernavn'] . "' OR fjordcruise_profil.profilnavn = '" . $_POST['brukernavn'] . "' )
+	      					AND fjordcruise_profil.passord = '" . $_POST['passord'] . "'";
+
+
+	      		$profilresultat = mysqli_query($con, $sqlstatement);
+
+	      		if ( $profilresultat !== false && mysqli_num_rows($profilresultat) > 0 ) {
+	      			echo "<script>
+	      					createCookie('profil', '" . mysqli_fetch_array($profilresultat)['profilid'] . "', 7);
+	      					if ( readCookie('previouspage') ) {
+	      						setTimeout( function() { window.location.replace( readCookie('previouspage') ) }, 5000 );
+	      					}
+	      					else {
+	      						setTimeout( function() { window.location.replace( 'bruker.php' ) }, 5000 );
+	      					}
+	      				</script>
+	      				Du har blitt logget inn på profilen " . $_POST['brukernavn'] . ". Du vil bli videresendt til nettsiden du ville besøke straks.";
+	      		}
+	      		else {
+	      			echo "Brukernavnet eller passordet som ble oppgitt er ikke riktig. <a href='#' onclick='window.location.replace(&#39;paalogging.php&#39;)'>Prøv igjen?</a>";
+	      		}
+			?>
 
 			<!-- InstanceEndEditable -->
 		</span>
