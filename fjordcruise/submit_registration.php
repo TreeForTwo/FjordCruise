@@ -74,63 +74,12 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" -->
-
-	<script>
-
-		if (readCookie('profil') && readCookie('previouspage')) {
-			window.location.replace(readCookie('previouspage'));
-		}
-		else if (readCookie('profil')) {
-			window.location.replace('bruker.php');
-		}
-
-	</script>
-
-	<!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
-
-			<form id="registrationform" action="submit_registrasjon.php" method="post">
-				<table class="registrationtable">
-					<tr>
-						<th colspan="2">Registrasjon</th>
-					</tr>
-					<tr>
-						<td><font class="b">Brukernavn</font></td>
-						<td><input type="text" name='profilnavn' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">E-Post</font></td>
-						<td><input type="text" name='epost' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">Fornavn</font></td>
-						<td><input type="text" name='fornavn' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">Etternavn</font></td>
-						<td><input type="text" name='etternavn' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">Telefon</font></td>
-						<td><input type="text" name='telefon' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">Passord</font></td>
-						<td><input type="password" name='passord1' required></td>
-					</tr>
-					<tr>
-						<td><font class="b">Gjenta passord</font></td>
-						<td><input type="password" name='passord2' required></td>
-					</tr>
-					<tr>
-						<td colspan='2'><a href='#' onclick="document.forms['registrationform'].submit();">Send inn registrasjon</a></td>
-					</tr>
-			</form>
 
 			<!-- InstanceEndEditable -->
 		</span>

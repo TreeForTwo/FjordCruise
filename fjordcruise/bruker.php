@@ -127,7 +127,7 @@
 	      							</table>";
 	      					}
 
-	      					echo "<form action='registrasjon.php' method='post'>
+	      					echo "<form action='submit_registrasjon.php' method='post'>
 	      							<table class='cruisetable'>
 	      								<tr>
 	      									<th colspan='3'>Bruker: " . $row['profilnavn'] . "</th>

@@ -102,6 +102,9 @@
 				<input type='submit' value='Logg inn'>
 			</form>
 
+			<br>
+			Har du ingen bruker? <a href="registrasjon.php">Registrer deg!</a>
+
 
 			<!-- InstanceEndEditable -->
 		</span>
