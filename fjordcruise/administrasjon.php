@@ -74,13 +74,94 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" -->
+
+	<script>
+		if ( readCookie('profil') ) {
+			window.paaloggetprofil = readCookie('profil');
+			// Hacky workarounds, woo!
+			if ( window.location.href.indexOf('&profil=' + window.paaloggetprofil) == -1 ) {
+				window.location.replace(window.location.href + '&profil=' + window.paaloggetprofil);
+			}
+		}
+		else {
+			createCookie('previouspage', window.location.href);
+			window.location.replace('paalogging.php');
+		}
+	</script>
+
+	<!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
+			<?php
+				if (@!$con=mysqli_connect($serverhost, $serveruser, $serverpass, $serverschema)){
+		            	echo "<h3>MySQL-serveren er ikke tilgjengelig nå. Last inn nettsiden på nytt, eller prøv igjen senere.</h3>";
+		            	exit;
+		      	}
 
+		      	$admincheck = mysqli_query( $con, "SELECT fjordcruise_profil.admin
+		      						     FROM fjordcruise_profil
+		      						     WHERE fjordcruise_profil.profilid = '" . $_GET['profil'] . "'" );
+
+		      	$adminrow = mysqli_fetch_array( $admincheck );
+
+		      	if ( $adminrow['admin'] != 1 ) {
+		      		echo "Du har ikke rettigheter til å se denne siden.";
+		      		exit;
+		      	}	
+		      	else {
+		      		if ( $_GET['modus'] == 'turer' ) {
+		      			echo "<form id='turform' action='submit_tur.php' method='post'>
+		      					<table class='turtabell'>
+		      						<tr>
+		      							<th colspan='2'>Legg til tur</th>
+		      						</tr>
+		      						<tr>
+		      							<td><font class='b'>Turnavn:</font></td>
+		      							<td><input type='text' name='turnavn'></td>
+		      						</tr>
+		      						<tr>
+		      							<td><font class='b'>Turbeskrivelse:</font></td>
+		      							<td><textarea class='turtextarea' name='turbeskrivelse'></textarea><script>$('.turtextarea').elastic();</script></td>
+		      						</tr>
+		      						<tr>
+		      							<td colspan='2'><a href='#' onclick='document.forms[&#39;turform&#39;].submit();'>Legg til tur</a></td>
+		      						</tr>
+		      					</table>
+		      				</form>";
+
+		      			$turerresult = mysqli_query( $con, "SELECT * FROM fjordcruise_turer" );
+
+		      			if ( mysqli_num_rows($turerresult) > 0 ){ echo "<div class='c'><font class='b'>Se og endre turer:</font></div><br>";}
+
+		      			while( $row = mysqli_fetch_array( $turerresult ) ) {
+		      				echo "<form id='turform" . $row['turid'] . "' action='submit_tur.php' method='post'>
+		      						<table class='turtabell'>
+		      							<tr>
+		      								<td><font class='b'>Turnavn:</font></td>
+		      								<td>" . $row['turnavn'] . "</td>
+		      								<td><input type='text' name='turnavn' value='" . $row['turnavn'] . "'></td>
+		      							</tr>
+		      							<tr>
+		      								<td><font class='b'>Turbeskrivelse:</font></td>
+		      								<td>" . $row['turbeskrivelse'] . "</td>
+		      								<td><textarea class='turtextarea' name='turbeskrivelse'>" . $row['turbeskrivelse'] . "</textarea></td>
+		      							</tr>
+		      							<tr>
+		      								<td colspan='3'><a href='#' onclick='document.forms[&#39;turform" . $row['turid'] . "&#39;].submit();'>Endre tur</a></td>
+		      								<input type='hidden' name='endretur' value='1'>
+		      								<input type='hidden' name='turid' value='" . $row['turid'] . "'>
+		      							</tr>
+		      						</table>
+		      					</form>";
+		      			}
+		      		}
+
+		      	}
+			?>
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>

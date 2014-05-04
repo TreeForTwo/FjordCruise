@@ -127,48 +127,49 @@
 	      							</table>";
 	      					}
 
-	      					echo "<form action='submit_registrasjon.php' method='post'>
+	      					echo "<form id='omregistrasjonform' action='submit_registrasjon.php' method='post'>
 	      							<table class='cruisetable'>
 	      								<tr>
-	      									<th colspan='3'>Bruker: " . $row['profilnavn'] . "</th>
+	      									<th colspan='6'>Bruker: " . $row['profilnavn'] . "</th>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>E-Post:</font></td>
-	      									<td>" . $row['epost'] . "</td>
-	      									<td><input name='epost' type='text' value='" . $row['epost'] . "'></td>
+	      									<td colspan='2'><font class='b'>E-Post:</font></td>
+	      									<td colspan='2'>" . $row['epost'] . "</td>
+	      									<td colspan='2'><input name='epost' type='text' value='" . $row['epost'] . "'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Fornavn</font></td>
-	      									<td>" . $row['fornavn'] . "</td>
-	      									<td><input name='fornavn' type='text' value='" . $row['fornavn'] . "'></td>
+	      									<td colspan='2'><font class='b'>Fornavn</font></td>
+	      									<td colspan='2'>" . $row['fornavn'] . "</td>
+	      									<td colspan='2'><input name='fornavn' type='text' value='" . $row['fornavn'] . "'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Etternavn</font></td>
-	      									<td>" . $row['etternavn'] . "</td>
-	      									<td><input name='etternavn' type='text' value='" . $row['etternavn'] . "'></td>
+	      									<td colspan='2'><font class='b'>Etternavn</font></td>
+	      									<td colspan='2'>" . $row['etternavn'] . "</td>
+	      									<td colspan='2'><input name='etternavn' type='text' value='" . $row['etternavn'] . "'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Telefon</font></td>
-	      									<td>" . $row['telefon'] . "</td>
-	      									<td><input name='telefon' type='text' value='" . $row['telefon'] . "'></td>
+	      									<td colspan='2'><font class='b'>Telefon</font></td>
+	      									<td colspan='2'>" . $row['telefon'] . "</td>
+	      									<td colspan='2'><input name='telefon' type='text' value='" . $row['telefon'] . "'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Nåværende passord:</font></td>
-	      									<td>xxxxxxxx</td>
-	      									<td><input name='gammeltpassord' type='password'></td>
+	      									<td colspan='2'><font class='b'>Nåværende passord:</font></td>
+	      									<td colspan='2'>xxxxxxxx</td>
+	      									<td colspan='2'><input name='gammeltpassord' type='password'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Nytt passord:</font></td>
-	      									<td>xxxxxxxx</td>
-	      									<td><input name='passord1' type='password'></td>
+	      									<td colspan='2'><font class='b'>Nytt passord:</font></td>
+	      									<td colspan='2'>xxxxxxxx</td>
+	      									<td colspan='2'><input name='passord1' type='password'></td>
 	      								</tr>
 	      								<tr>
-	      									<td><font class='b'>Gjenta nytt passord:</font></td>
-	      									<td>xxxxxxxx</td>
-	      									<td><input name='passord2' type='password'></td>
+	      									<td colspan='2'><font class='b'>Gjenta nytt passord:</font></td>
+	      									<td colspan='2'>xxxxxxxx</td>
+	      									<td colspan='2'><input name='passord2' type='password'></td>
 	      								</tr>
-	      								<tr>
-	      									<td colspan='3'><input value='Endre registrerte verdier' type='submit' onclick='createCookie(&#39;previouspage&#39;,window.location.href)'></td>
+	      								<tr style='text-align:center;'>
+	      									<td colspan='3'><a href='#' onclick='eraseCookie(&#39;profil&#39);window.location.replace(&#39;index.php&#39);'>Logg av</a></td>
+	      									<td colspan='3'><a href='#' onclick='createCookie(&#39;previouspage&#39;,window.location.href);document.forms[&#39;omregistrasjonform&#39;].submit();'>Endre verdier</a></td>
 	      									<input type='hidden' name='omregistrasjon' value='1'>
 	      									<input type='hidden' name='profilid' value='" . $_GET['profil'] . "'>
 	      								</tr>
@@ -198,8 +199,8 @@
 		      										<td colspan='2'>" . $reservations['fornavn'] . " " . $reservations['etternavn'] . "</td>
 		      									</tr>
 		      									<tr>
-		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter.</td>
-		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter.</td>
+		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter</td>
+		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter</td>
 		      									</tr>
 		      									<tr>
 		      										<td>" . $reservations['bestiltdato'] . "</td>
