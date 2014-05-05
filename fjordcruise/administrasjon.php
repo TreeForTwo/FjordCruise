@@ -159,7 +159,16 @@
 		      					</form>";
 		      			}
 		      		}
-
+		      		else if ( $_GET['modus'] == 'avganger' ) {
+		      			echo "<form id='avgangform' action='submit_avgang.php' method='post'>
+		      					<table class='avgangtabell'>
+		      						<tr>
+		      							<th colspan='2'>Legg til avgang</th>
+		      						</tr>
+		      						<tr>
+		      							<td><font class='b'>Tur:</font></td>
+		      							<td><select>"
+		      		}
 		      	}
 			?>
 			<!-- InstanceEndEditable -->
