@@ -182,7 +182,8 @@
 	      										AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid
 	      										AND fjordcruise_avganger.turid = fjordcruise_turer.turid
 	      										AND fjordcruise_bestillinger.profilid = " . $_GET['profil'] . "
-	      										AND fjordcruise_profil.profilid = " . $_GET['profil'];
+	      										AND fjordcruise_profil.profilid = " . $_GET['profil'] . "
+	      										ORDER BY fjordcruise_bestillinger.bestiltdato DESC";
 
 	      						$reservationarray = mysqli_query($con, $reservationsentence);
 
