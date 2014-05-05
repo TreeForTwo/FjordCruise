@@ -79,7 +79,16 @@
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
-			<!-- InstanceBeginEditable name="EditRegion3" --><!-- InstanceEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" -->
+			<h1>Om oss:</h1>
+			Vi er et kompani startet opp av en gruppe interesserte i norsk kultur og norske fjorder. Vi ville gjerne at andre lett kunne se den praktfulle naturen til landet de er i. 
+			Vi har nå tilbudt turer for snart 20 år, og vi ser frem til 20 år til med utvikling av våres tilbud!<br><br>
+			<h1>Kontakt oss:</h1>
+			E-post: <a href='mailto:kontakt@fjordcruise.no'>kontakt@fjordcruise.no</a><br>
+			Telefon: 22114412 <br>
+			Adresse: Åkrafjordvegen 3
+
+			<!-- InstanceEndEditable -->
 		</span>
 	</div>
 </body>

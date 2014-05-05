@@ -160,11 +160,8 @@
 						}
 					}
 					else if ( $_GET['modus'] == 'avganger' ) {
-						$turerresult = mysqli_query( $con, "SELECT fjordcruse_turer.turid, fjordcruise_turer.turnavn FROM fjordcruise_turer")
-
-						// Fetching a result row wipes that from the resultset, making a resultset useless after a fetch_array.
-						// Is it possible to make a copy of it and use that instead?
-						$turerresultcopy = $turerresult;
+						$turerresultcopy = mysqli_query( $con, "SELECT fjordcruise_turer.turid, fjordcruise_turer.turnavn FROM fjordcruise_turer");
+						$baater = mysqli_query( $con, "SELECT * FROM fjordcruise_baater" );
 
 						echo "<form id='avgangform' action='submit_avgang.php' method='post'>
 								<table class='avgangtabell'>
@@ -206,18 +203,28 @@
 										<td><input type='time' name='avgangtid'></td>
 									</tr>
 									<tr>
-										<td>Deaktiver: <input type='checkbox' name='avganggjemt' value='1'> (Gjem fra brukere)</td>
+										<td><font class='b'>Båt:</font></td>
+										<td><select name='baatid'>";
+
+										while ( $baaterrow = mysqli_fetch_array( $baater ) ) {
+											echo "<option value='" . $baaterrow['baatid'] . "'>" . $baaterrow['baatnavn'] . "</option>";
+										}	
+
+						echo			     "</select></td>
+									<tr>
+										<td><font class='b'>Deaktiver: </font><input type='checkbox' name='gjemtavgang' value='1'> (Gjem fra brukere)</td>
 										<td><a href='#' onclick='document.forms[&#39;avgangform&#39;].submit();'>Legg til avgang</a></td>
 									</tr>
 								</table>
 							</form>";
 
-						$avgangresult = mysqli_query( $con, "SELECT * FROM fjordcruise_avganger, fjordcruise_turer WHERE fjordcruise_avganger.turid = fjordcruise_turer.turid" );
+						$avgangresult = mysqli_query( $con, "SELECT * FROM fjordcruise_avganger, fjordcruise_turer, fjordcruise_baater WHERE fjordcruise_avganger.turid = fjordcruise_turer.turid AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid" );
 
 						if ( mysqli_num_rows($avgangresult) > 0 ){ echo "<div class='c'><font class='b'>Se og endre avganger:</font></div><br>";}
 
 						while ( $avgangrow = mysqli_fetch_array( $avgangresult ) ) {
-							$turerresultcopy = $turerresult;
+							$turerresultcopies = mysqli_query( $con, "SELECT fjordcruise_turer.turid, fjordcruise_turer.turnavn FROM fjordcruise_turer" );
+							$baatercopy = mysqli_query( $con, "SELECT * FROM fjordcruise_baater" );
 
 							echo "<form id='avgangform" . $avgangrow['avgangid'] . "' action='submit_avgang.php' method='post'>
 									<table class='avgangtabell'>
@@ -226,10 +233,10 @@
 											<td colspan='2'>" . $avgangrow['turnavn'] . "</td>
 											<td colspan='2'><select name='turid'>";
 
-											while ( $turrow = mysqli_fetch_array( $turerresultcopy ) ) {
-												echo "<option value='" . $turrow['turid'] . "'";
-												if ( $turrow['turid'] == $avgangrow['turid'] ) { echo "selected='selected'"; }
-												echo">" . $turrow['turnavn'] . "</option>";
+											while ( $turerow = mysqli_fetch_array( $turerresultcopies ) ) {
+												echo "<option value='" . $turerow['turid'] . "'";
+												if ( $turerow['turid'] == $avgangrow['turid'] ) { echo "selected='selected'"; }
+												echo">" . $turerow['turnavn'] . "</option>";
 											}
 							
 							echo 			"</select></td>
@@ -262,7 +269,18 @@
 											<td colspan='2'><input type='time' name='avgangtid' value='" . $avgangrow['avgangtid'] . "'></td>
 										</tr>
 										<tr>
-											<td colspan='3'>Deaktiver: <input type='checkbox' name='avganggjemt' value='1'"; if ( $avgangrow['avganggjemt'] == 1 ) { echo " checked"; } echo "> (Gjem fra brukere)</td>
+											<td colspan='2'><font class='b'>Båt:</td>
+											<td colspan='2'>" . $avgangrow['baatnavn']  . "
+											<td colspan='2'><select name='baatid'>";
+
+											while ( $baatrow = mysqli_fetch_array( $baatercopy ) ) {
+												echo "<option value='" . $baatrow['baatid'] . "'";
+												if ( $baatrow['baatid'] == $avgangrow['baatid'] ) { echo "selected='selected'"; }
+												echo">" . $baatrow['baatnavn'] . "</option>";
+											}
+										
+							echo		     "<tr>
+											<td colspan='3'>Deaktiver: <input type='checkbox' name='gjemtavgang' value='1'"; if ( $avgangrow['gjemtavgang'] == 1 ) { echo " checked"; } echo "> (Gjem fra brukere)</td>
 											<td colspan='3'><a href='#' onclick='document.forms[&#39;avgangform" . $avgangrow['avgangid'] . "&#39;].submit();'>Endre avgang</a></td>
 											<input type='hidden' name='avgangid' value='" . $avgangrow['avgangid'] . "'>
 											<input type='hidden' name='endreavgang' value='1'>
@@ -270,6 +288,46 @@
 									</table>
 								</form>";
 						}
+					}
+					else if ( $_GET['modus'] == "reservasjoner" ) {
+						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
+	      										FROM fjordcruise_bestillinger, fjordcruise_baater, fjordcruise_turer, fjordcruise_profil, fjordcruise_avganger
+	      										WHERE fjordcruise_bestillinger.avgangid = fjordcruise_avganger.avgangid
+	      										AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid
+	      										AND fjordcruise_avganger.turid = fjordcruise_turer.turid
+	      										AND fjordcruise_bestillinger.profilid = fjordcruise_profil.profilid
+	      										ORDER BY fjordcruise_bestillinger.bestiltdato DESC";
+
+	      						$reservationarray = mysqli_query($con, $reservationsentence);
+
+	      						if ( mysqli_num_rows($reservationarray) ) {
+		      						echo "<h1>Reservasjoner</h1><div id='reservationwrap'>";
+
+		      						while( $reservations = mysqli_fetch_array($reservationarray) ) {
+		      							echo "<table class='reservationtable'>
+		      									<tr>
+		      										<th colspan='2'>" . $reservations['turnavn'] . "</th>
+		      									</tr>
+		      									<tr>
+		      										<td colspan='2'>" . $reservations['fornavn'] . " " . $reservations['etternavn'] . "</td>
+		      									</tr>
+		      									<tr>
+		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter</td>
+		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter</td>
+		      									</tr>
+		      									<tr>
+		      										<td>" . $reservations['bestiltdato'] . "</td>
+		      										<td>" . $reservations['baatnavn'] . "</td>
+		      									</tr>
+		      								</table>";
+		      						}
+
+		      						echo "</div>";
+		      					}
+		      					else {
+		      						echo "Found no reservations.";
+		      					}
+
 					}
 				}
 			?>

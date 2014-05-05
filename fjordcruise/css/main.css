@@ -230,3 +230,22 @@ textarea {
 .turtabell tr:last-child {
 	text-align:center;
 }
+
+/* Avgangtabell */
+.avgangtabell {
+	width:100%;
+
+	margin-bottom:20px;
+}
+
+.avgangtabell td, .avgangtabell th {
+	border:2px solid #000;
+
+	padding:6px;
+
+	vertical-align:top;
+}
+
+.avgangtabell td {
+	width:33%;
+}

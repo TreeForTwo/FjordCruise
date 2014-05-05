@@ -127,7 +127,7 @@
 		      				echo "something just happened";
 		      			}
 		      			else {
-		      				echo "Turen har nå blitt lagt til. Du blir snart tatt tilbake til tursiden. <a href='paalogging.php'>Klikk her hvis det tar lenger enn noen sekunder.</a>
+		      				echo "Turen har nå blitt lagt til. Du blir snart tatt tilbake til tursiden. <a href='administrasjon.php?modus=turer'>Klikk her hvis det tar lenger enn noen sekunder.</a>
 			      				<script>
 			      					setTimeout( function() { window.location.replace( 'administrasjon.php?modus=turer' ) }, 5000 );
 			      				</script>";

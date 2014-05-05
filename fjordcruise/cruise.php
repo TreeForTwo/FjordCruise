@@ -89,7 +89,7 @@
       		
 	      		$sqlstatement =  "SELECT fjordcruise_avganger.avgangid, fjordcruise_avganger.avgangtid, fjordcruise_avganger.avgangpris, fjordcruise_avganger.avgangprisbarn, 
 	      						 fjordcruise_avganger.avgangmandag,  fjordcruise_avganger.avgangtirsdag,  fjordcruise_avganger.avgangonsdag,  fjordcruise_avganger.avgangtorsdag,  fjordcruise_avganger.avgangfredag,  fjordcruise_avganger.avganglordag,  fjordcruise_avganger.avgangsondag,  fjordcruise_avganger.avgangdato, 
-	      						 fjordcruise_turer.turnavn, fjordcruise_turer.turbeskrivelse, fjordcruise_turer.turvarighet, fjordcruise_baater.baatplasser, fjordcruise_baater.baatnavn
+	      						 fjordcruise_turer.turnavn, fjordcruise_turer.turbeskrivelse, fjordcruise_baater.baatplasser, fjordcruise_baater.baatnavn
 	      					FROM fjordcruise_avganger, fjordcruise_turer, fjordcruise_baater
 	      					WHERE fjordcruise_avganger.baatid = fjordcruise_baater.baatid
 	      					AND fjordcruise_avganger.turid = fjordcruise_turer.turid
