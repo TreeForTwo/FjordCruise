@@ -42,7 +42,7 @@
 	$serverhost="p:localhost";
 	$serveruser="root";
 	$serverpass="";
-	$serverschema="maro0211"
+	$serverschema="maro0211";
 
 	?>
 
