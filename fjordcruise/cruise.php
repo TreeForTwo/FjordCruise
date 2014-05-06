@@ -26,6 +26,13 @@
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
+
+				/* Mark current page button as active */
+				$("[href]").each(function() {
+    					if (this.href == window.location.href) {
+        					$(this).addClass("activepage");
+        				}
+    				});
 			}
 		);
 
@@ -75,7 +82,23 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" -->
+
+	<script>
+		function CruiseForm( formname ) {
+			if ( readCookie('profil') ) {
+				window.paaloggetprofil = readCookie('profil');
+				$(".profilid").val(window.paaloggetprofil);
+				document.forms[formname].submit();
+			}
+			else {
+				createCookie('previouspage', 'cruise.php');
+				window.location.replace('paalogging.php');
+			}
+		}
+	</script>
+
+	<!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
@@ -136,9 +159,10 @@
 		      						<td><font class='b'>Pris:</font><br>Voksne: " . $row['avgangpris'] . "<br>Barn/Honnør: " . $row['avgangprisbarn'] . "</td>
 		      					</tr>
 		      					<tr>
-		      						<td class='orderbutton'><a href='#' onclick='document.forms[&#39;bestillingvalg" . $row['avgangid'] . "&#39;].submit();'>Bestill!</a></td>
+		      						<td class='orderbutton'><a href='#' onclick='CruiseForm(&#39;bestillingvalg" . $row['avgangid'] . "&#39;);'>Bestill!</a></td>
 		      						<input type='hidden' name='avgangid' value='" . $row['avgangid'] . "'>
 		      						<input type='hidden' name='avgangtid' value='" . $row['avgangtid'] . "'>
+		      						<input class='profilid' type='hidden' name='profilid' value=''>
 		      					</tr>
 							</table>
 						</form>";

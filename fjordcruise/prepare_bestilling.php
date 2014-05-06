@@ -82,12 +82,40 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" -->
+
+	<script>
+		if ( readCookie('profil') ) {
+			window.paaloggetprofil = readCookie('profil');
+			// Hacky workarounds, woo!
+			if ( window.location.href.indexOf('?profil=' + window.paaloggetprofil) == -1 ) {
+				window.location.replace(window.location.href + '?profil=' + window.paaloggetprofil);
+			}
+		}
+		else {
+			createCookie('previouspage', 'cruise.php');
+			window.location.replace('paalogging.php');
+		}
+	</script>
+
+	<!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
-			<!-- InstanceBeginEditable name="EditRegion3" --><!-- InstanceEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" -->
+
+			<?php
+				if (@!$con=mysqli_connect($serverhost, $serveruser, $serverpass, $serverschema)){
+	            		echo "<h3>MySQL-serveren er ikke tilgjengelig nå. Last inn nettsiden pÃ¥ nytt, eller prøv igjen senere.</h3>";
+	            		exit;
+	      		}
+
+
+			
+			?>
+
+			<!-- InstanceEndEditable -->
 		</span>
 	</div>
 

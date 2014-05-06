@@ -26,6 +26,13 @@
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
+
+				/* Mark current page button as active */
+				$("[href]").each(function() {
+    					if (this.href == window.location.href) {
+        					$(this).addClass("activepage");
+        				}
+    				});
 			}
 		);
 
@@ -80,10 +87,6 @@
 	<script>
 		if ( readCookie('profil') ) {
 			window.paaloggetprofil = readCookie('profil');
-			// Hacky workarounds, woo!
-			if ( window.location.href.indexOf('?profil=' + window.paaloggetprofil) == -1 ) {
-				window.location.replace(window.location.href + '?profil=' + window.paaloggetprofil);
-			}
 		}
 		else {
 			createCookie('previouspage', window.location.href);
@@ -102,11 +105,11 @@
 			<?php
 
 				if (@!$con=mysqli_connect($serverhost, $serveruser, $serverpass, $serverschema)){
-	            		echo "<h3>MySQL-serveren er ikke tilgjengelig nÃ¥. Last inn nettsiden pÃ¥ nytt, eller prÃ¸v igjen senere.</h3>";
+	            		echo "<h3>MySQL-serveren er ikke tilgjengelig n?. Last inn nettsiden p? nytt, eller pr?v igjen senere.</h3>";
 	            		exit;
 	      		}
 
-	      		$avgangsdager = mysqli_query( $con, "SELECT fjordcruise_avganger.avgangmandag, fjordcruise_avganger.avgangtirsdag, fjordcruise_avganger.avgangonsdag, fjordcruise_avganger.avgangtorsdag, fjordcruise_avganger.avgangfredag, fjordcruise_avganger.avganglordag, fjordcruise_avganger.avgangsondag 
+	      		$avgangdager = mysqli_query( $con, "SELECT fjordcruise_avganger.avgangmandag, fjordcruise_avganger.avgangtirsdag, fjordcruise_avganger.avgangonsdag, fjordcruise_avganger.avgangtorsdag, fjordcruise_avganger.avgangfredag, fjordcruise_avganger.avganglordag, fjordcruise_avganger.avgangsondag 
 	      								 FROM fjordcruise_avganger
 	      								 WHERE fjordcruise_avganger.avgangid = $_POST[avgangid]");
 
@@ -142,16 +145,27 @@
 				      			}
 
 				      			if ( isset( $datoer['avgangfredag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next friday") ) . "'>Fredag, " . date("Y-m-d", strtotime("next friday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option";
+				      				echo "<option value='" . date("Y-m-d", strtotime("next friday") ) . "'>Fredag, " . date("Y-m-d", strtotime("next friday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>";
 				      			}
 
 				      			if ( isset( $datoer['avganglordag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next saturday") ) . "'>LÃ¸rdag, " . date("Y-m-d", strtotime("next saturday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
+				      				echo "<option value='" . date("Y-m-d", strtotime("next saturday") ) . "'>Lørdag, " . date("Y-m-d", strtotime("next saturday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
 				      			}
 
 				      			if ( isset( $datoer['avgangsondag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next sunday") ) . "'>SÃ¸ndag, " . date("Y-m-d", strtotime("next sunday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
+				      				echo "<option value='" . date("Y-m-d", strtotime("next sunday") ) . "'>Søndag, " . date("Y-m-d", strtotime("next sunday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
 				      			}
+				echo 			     "</select></td>
+							</tr>
+							<tr>
+								<td><font class='b'>Billetter</font></td>
+								<td>Voksne: <input type='number' name='antallbilletter'> Barn/Honnør: <input type='number' name='antallbarnebilletter'></td>
+							</tr>
+							<tr>
+								<td colspan='2'><a href='#' onclick='document.forms['bestillingsform'].submit();'>Send inn bestilling!</a></td>
+							</tr>
+						</table>
+					</form>";
 
 			?>
 

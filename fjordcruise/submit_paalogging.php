@@ -26,6 +26,13 @@
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
+
+				/* Mark current page button as active */
+				$("[href]").each(function() {
+    					if (this.href == window.location.href) {
+        					$(this).addClass("activepage");
+        				}
+    				});
 			}
 		);
 
