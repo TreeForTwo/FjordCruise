@@ -74,7 +74,7 @@
 		<div id="navwrap">
 			<ul>
 				<li><a href="aakrafjorden.php">Åkrafjorden</a></li>
-				<li><a href="cruise.php">Cruise</a></li>
+				<li><a href="cruise.php" class="activepage">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
 				<li id="paalogging"><a href="bruker.php">Bruker</a></li>
