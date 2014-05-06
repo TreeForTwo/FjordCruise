@@ -15,6 +15,7 @@
 	<script src="js/jquery.scalewindow.js"></script>
 	<script src="js/jquery.fittext.js"></script>
 	<script src="js/jquery.flowtype.js"></script>
+	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
 	<script>
 		$( document ).ready(
@@ -42,7 +43,7 @@
 	$serverhost="p:localhost";
 	$serveruser="root";
 	$serverpass="";
-	$serverschema="maro0211"
+	$serverschema="maro0211";
 
 	?>
 
@@ -116,33 +117,57 @@
 	      			if ( isset( $_POST['gjemtavgang'] ) && ( $row['gjemtavgang'] != $_POST['gjemtavgang'] ) ) {
 	      				$newarray['gjemtavgang'] = mysqli_real_escape_string( $con, $_POST['gjemtavgang'] );
 	      			}
+	      			else if ( !isset( $_POST['gjemtavgang'] ) ) {
+	      				$deletearray['gjemtavgang'] = "";
+	      			}
 
 	      			if ( isset( $_POST['avgangmandag'] ) && ( $row['avgangmandag'] != $_POST['avgangmandag'] ) ) {
 	      				$newarray['avgangmandag'] = mysqli_real_escape_string( $con, $_POST['avgangmandag'] );
+	      			}
+	      			else if ( !isset( $_POST['avgangmandag'] ) ) {
+	      				$deletearray['avgangmandag'] = "";
 	      			}
 
 	      			if ( isset( $_POST['avgangtirsdag'] ) && ( $row['avgangtirsdag'] != $_POST['avgangtirsdag'] ) ) {
 	      				$newarray['avgangtirsdag'] = mysqli_real_escape_string( $con, $_POST['avgangtirsdag'] );
 	      			}
+	      			else if ( !isset( $_POST['avgangtirsdag'] ) ) {
+	      				$deletearray['avgangtirsdag'] = "";
+	      			}
 
 	      			if ( isset( $_POST['avgangonsdag'] ) && ( $row['avgangonsdag'] != $_POST['avgangonsdag'] ) ) {
 	      				$newarray['avgangonsdag'] = mysqli_real_escape_string( $con, $_POST['avgangonsdag'] );
+	      			}
+	      			else if ( !isset( $_POST['avgangonsdag'] ) ) {
+	      				$deletearray['avgangonsdag'] = "";
 	      			}
 
 	      			if ( isset( $_POST['avgangtorsdag'] ) && ( $row['avgangtorsdag'] != $_POST['avgangtorsdag'] ) ) {
 	      				$newarray['avgangtorsdag'] = mysqli_real_escape_string( $con, $_POST['avgangtorsdag'] );
 	      			}
+	      			else if ( !isset( $_POST['avgangtorsdag'] ) ) {
+	      				$deletearray['avgangtorsdag'] = "";
+	      			}
 
 	      			if ( isset( $_POST['avgangfredag'] ) && ( $row['avgangfredag'] != $_POST['avgangfredag'] ) ) {
 	      				$newarray['avgangfredag'] = mysqli_real_escape_string( $con, $_POST['avgangfredag'] );
+	      			}
+	      			else if ( !isset( $_POST['avgangfredag'] ) ) {
+	      				$deletearray['avgangfredag'] = "";
 	      			}
 
 	      			if ( isset( $_POST['avganglordag'] ) && ( $row['avganglordag'] != $_POST['avganglordag'] ) ) {
 	      				$newarray['avganglordag'] = mysqli_real_escape_string( $con, $_POST['avganglordag'] );
 	      			}
+	      			else if ( !isset( $_POST['avganglordag'] ) ) {
+	      				$deletearray['avganglordag'] = "";
+	      			}
 
 	      			if ( isset( $_POST['avgangsondag'] ) && ( $row['avgangsondag'] != $_POST['avgangsondag'] ) ) {
 	      				$newarray['avgangsondag'] = mysqli_real_escape_string( $con, $_POST['avgangsondag'] );
+	      			}
+	      			else if ( !isset( $_POST['avgangsondag'] ) ) {
+	      				$deletearray['avgangsondag'] = "";
 	      			}
 
 	      			if ( isset( $_POST['avgangdato'] ) && ( $row['avgangdato'] != $_POST['avgangdato'] ) ) {
@@ -153,6 +178,14 @@
 	      				if ( !mysqli_query($con, "UPDATE fjordcruise_avganger
 	      					              SET $k = '" . $v . "'
 	      					              WHERE fjordcruise_avganger.avgangid = " . $_POST['avgangid']) ) {
+	      					echo "Det har skjedd en feil! <a href='#' onclick='history.go(-1);'>Prøv igjen?</a>";
+	      				}
+	      			}
+
+	      			foreach($deletearray as $k => $v) {
+	      				if ( !mysqli_query($con, "UPDATE fjordcruise_avganger
+	      										  SET $k = NULL 
+	      										  WHERE fjordcruise_avganger.avgangid = " . $_POST['avgangid'] ) ) {
 	      					echo "Det har skjedd en feil! <a href='#' onclick='history.go(-1);'>Prøv igjen?</a>";
 	      				}
 	      			}
@@ -196,5 +229,11 @@
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>
+
+	<?php
+		if (isset($con)) {
+			mysqli_close($con);
+		}
+	?>
 </body>
 <!-- InstanceEnd --></html>

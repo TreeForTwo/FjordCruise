@@ -15,6 +15,7 @@
 	<script src="js/jquery.scalewindow.js"></script>
 	<script src="js/jquery.fittext.js"></script>
 	<script src="js/jquery.flowtype.js"></script>
+	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
 	<script>
 		$( document ).ready(
@@ -213,7 +214,7 @@
 		      						echo "</div>";
 		      					}
 		      					else {
-		      						echo "Found no reservations.";
+		      						echo "Du har ingen reservasjoner.";
 		      					}
 
 	      				}
@@ -228,5 +229,11 @@
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>
+
+	<?php
+		if (isset($con)) {
+			mysqli_close($con);
+		}
+	?>
 </body>
 <!-- InstanceEnd --></html>

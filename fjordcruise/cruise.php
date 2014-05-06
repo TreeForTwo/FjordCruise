@@ -15,6 +15,7 @@
 	<script src="js/jquery.scalewindow.js"></script>
 	<script src="js/jquery.fittext.js"></script>
 	<script src="js/jquery.flowtype.js"></script>
+	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
 	<script>
 		$( document ).ready(
@@ -42,7 +43,7 @@
 	$serverhost="p:localhost";
 	$serveruser="root";
 	$serverpass="";
-	$serverschema="maro0211"
+	$serverschema="maro0211";
 
 	?>
 
@@ -86,10 +87,32 @@
 	            		echo "<h3>MySQL-serveren er ikke tilgjengelig nå. Last inn nettsiden på nytt, eller prøv igjen senere.</h3>";
 	            		exit;
 	      		}
+
+	      		function FindDates( $id, $connection ) {
+	      			$datoer = mysqli_query( $connection, "SELECT fjordcruise_avganger.avgangmandag,  fjordcruise_avganger.avgangtirsdag,  fjordcruise_avganger.avgangonsdag,  fjordcruise_avganger.avgangtorsdag,  fjordcruise_avganger.avgangfredag,  fjordcruise_avganger.avganglordag,  fjordcruise_avganger.avgangsondag
+	      				                           FROM fjordcruise_avganger
+	      				                           WHERE fjordcruise_avganger.avgangid = $id" );
+
+	      			$datestring = "";
+
+	      			$stuff = mysqli_fetch_assoc( $datoer );
+
+	      			foreach( $stuff as $k => $v ) {
+						if ( isset( $v ) ) {
+							$datestring = $datestring . ucfirst( str_replace('avgang', '', $k) ) . ", ";
+						}
+	      			}
+
+	      			$datestring = rtrim( $datestring, ", " );
+
+	      			$datestring = str_replace( 'Lordag', 'Lørdag', $datestring );
+	      			$datestring = str_replace( 'Sondag', 'Søndag', $datestring );
+
+	      			return $datestring;
+	      		}
       		
 	      		$sqlstatement =  "SELECT fjordcruise_avganger.avgangid, fjordcruise_avganger.avgangtid, fjordcruise_avganger.avgangpris, fjordcruise_avganger.avgangprisbarn, 
-	      						 fjordcruise_avganger.avgangmandag,  fjordcruise_avganger.avgangtirsdag,  fjordcruise_avganger.avgangonsdag,  fjordcruise_avganger.avgangtorsdag,  fjordcruise_avganger.avgangfredag,  fjordcruise_avganger.avganglordag,  fjordcruise_avganger.avgangsondag,  fjordcruise_avganger.avgangdato, 
-	      						 fjordcruise_turer.turnavn, fjordcruise_turer.turbeskrivelse, fjordcruise_baater.baatplasser, fjordcruise_baater.baatnavn
+	      						 fjordcruise_turer.turid, fjordcruise_turer.turnavn, fjordcruise_turer.turbeskrivelse, fjordcruise_baater.baatplasser, fjordcruise_baater.baatnavn
 	      					FROM fjordcruise_avganger, fjordcruise_turer, fjordcruise_baater
 	      					WHERE fjordcruise_avganger.baatid = fjordcruise_baater.baatid
 	      					AND fjordcruise_avganger.turid = fjordcruise_turer.turid
@@ -98,21 +121,28 @@
 	      		$cruise = mysqli_query($con, $sqlstatement);
 
 	      		while( $row = mysqli_fetch_array($cruise)) {
-	      			echo "<table class='cruisetable'>
-	      					<tr>
-	      						<th colspan='2'>" . $row['turnavn'] . "</th>
-	      					</tr>
-	      					<tr>
-	      						<td rowspan='3'>" . $row['turbeskrivelse'] . "</td>
-	      						<td><font class='b'>Avganger</font><br>Dato går hit - " . str_replace('00:00', '00', $row['avgangtid']) . "</td>
-	      					</tr>
-	      					<tr>
-	      						<td><font class='b'>Pris:</font><br>Voksne: " . $row['avgangpris'] . "<br>Barn/Honnør: " . $row['avgangprisbarn'] . "</td>
-	      					</tr>
-	      					<tr>
-	      						<td class='orderbutton'><a href='bestilling.php?id=" . $row['avgangid'] . "'>Bestill!</a></td>
-	      					</tr>
-						</table>";
+	      			echo "<form id='bestillingvalg" . $row['avgangid'] . "' action='bestilling.php' method='post'>
+		      				<table class='cruisetable'>
+		      					<tr>
+		      						<th colspan='2'>" . $row['turnavn'] . "</th>
+		      						<input type='hidden' name='turid' value='" . $row['turid'] . "'>
+		      						<input type='hidden' name='turnavn' value='" . $row['turnavn'] . "'>
+		      					</tr>
+		      					<tr>
+		      						<td rowspan='3'>" . $row['turbeskrivelse'] . "</td>
+		      						<td><font class='b'>Avganger</font><br>" . FindDates( $row['avgangid'], $con ) . "<br>" . str_replace('00:00', '00', $row['avgangtid']) . "</td>
+		      					</tr>
+		      					<tr>
+		      						<td><font class='b'>Pris:</font><br>Voksne: " . $row['avgangpris'] . "<br>Barn/Honnør: " . $row['avgangprisbarn'] . "</td>
+		      					</tr>
+		      					<tr>
+		      						<td class='orderbutton'><a href='#' onclick='document.forms[&#39;bestillingvalg" . $row['avgangid'] . "&#39;].submit();'>Bestill!</a></td>
+		      						<input type='hidden' name='avgangid' value='" . $row['avgangid'] . "'>
+		      						<input type='hidden' name='avgangtid' value='" . $row['avgangtid'] . "'>
+		      					</tr>
+							</table>
+						</form>";
+
 	      		}
       		?>
 
@@ -121,5 +151,11 @@
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>
+
+	<?php
+		if (isset($con)) {
+			mysqli_close($con);
+		}
+	?>
 </body>
 <!-- InstanceEnd --></html>

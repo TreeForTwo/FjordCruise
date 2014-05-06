@@ -15,6 +15,7 @@
 	<script src="js/jquery.scalewindow.js"></script>
 	<script src="js/jquery.fittext.js"></script>
 	<script src="js/jquery.flowtype.js"></script>
+	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
 	<script>
 		$( document ).ready(
@@ -92,5 +93,11 @@
 			Morbi sodales nunc arcu, nec suscipit erat lacinia sed. Donec quis dui commodo, lacinia lorem vitae, congue metus. Donec euismod erat at quam eleifend vestibulum. Donec vel sagittis leo. Vivamus venenatis pellentesque dolor eu lobortis. Nam nec ipsum et nulla tincidunt egestas. Mauris blandit consequat bibendum. Suspendisse potenti. Pellentesque non est at lectus accumsan sodales et a velit. Quisque nec felis et lectus rhoncus ultricies. Proin vitae ipsum id augue rhoncus pretium ut quis purus. Vivamus sagittis rutrum eros vitae malesuada. Integer feugiat odio sodales sem luctus, at rhoncus sem laoreet. Sed congue sem diam, eu commodo eros vehicula gravida.f<!-- InstanceEndEditable -->
 		</span>
 	</div>
+
+	<?php
+		if (isset($con)) {
+			mysqli_close($con);
+		}
+	?>
 </body>
 <!-- InstanceEnd --></html>
