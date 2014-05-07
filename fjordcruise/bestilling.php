@@ -115,49 +115,54 @@
 	      								 FROM fjordcruise_avganger
 	      								 WHERE fjordcruise_avganger.avgangid = $_POST[avgangid]");
 
-	      		function DateTranslate( string ) {
-	      			string = str_replace( "avgang", "", string );
+	      		function DateTranslate( $string ) {
+	      			$string = str_replace( "avgang", "", $string );
 
-	      			if ( string == "mandag" ) {
-	      				return "monday"
+	      			if ( $string == "mandag" ) {
+	      				$date = "monday";
 	      			}
-	      			elseif ( string == "tirsdag" ) {
-	      				return "tuesday"
+	      			elseif ( $string == "tirsdag" ) {
+	      				$date = "tuesday";
 	      			}
-	      			elseif ( string == "onsdag" ) {
-	      				return "wednesday"
+	      			elseif ( $string == "onsdag" ) {
+	      				$date = "wednesday";
 	      			}
-	      			elseif ( string == "torsdag" ) {
-	      				return "thursday"
+	      			elseif ( $string == "torsdag" ) {
+	      				$date = "thursday";
 	      			}
-	      			elseif ( string == "fredag" ) {
-	      				return "friday"
+	      			elseif ( $string == "fredag" ) {
+	      				$date = "friday";
 	      			}
-	      			elseif ( string == "lordag" ) {
-	      				return "saturday"
+	      			elseif ( $string == "lordag" ) {
+	      				$date = "saturday";
 	      			}
-	      			elseif ( string == "sondag" ) {
-	      				return "sunday"
+	      			elseif ( $string == "sondag" ) {
+	      				$date = "sunday";
 	      			}
+
+	      			return $date;
 	      		}
 
 	      		function DateOptions( $con, $k, $datestring ) {
-						$date = date("Y-m-d", strtotime($datestring) );
+						$date = date("Y-m-d", strtotime( $datestring ) );
+						$date = mysqli_real_escape_string( $con, str_replace( "/", "-", $date ) );
 						$dato = ucfirst( str_replace("avgang", "", $k ) );
 
 						$dato = str_replace( 'Lordag', 'Lørdag', $dato );
 	      				$dato = str_replace( 'Sondag', 'Søndag', $dato );
 
 
-						$dag = mysqli_query( $con, "SELECT SUM(fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter 
+						$dag = mysqli_query( $con, "SELECT SUM(antallbilletter) +  SUM(antallbarnebilletter)
 												    FROM fjordcruise_bestillinger
 												    WHERE fjordcruise_bestillinger.bestiltdato = '" . $date . "'
 												    GROUP BY fjordcruise_bestillinger.bestiltdato" );
 
-						$ledigebilleter = 50 - mysqli_fetch_assoc($dag)['value_sum'];
+						$lbarray = mysqli_fetch_array($dag);
+
+						$ledigebilleter = 50 - $lbarray[0];
 
 						if ( $ledigebilleter > 0 ) {
-							echo "<option value='" . $date . "'>" . $dato . ", " . $date . ", " . $ledigebilleter . " ledige plasser.</option>"
+							echo "<option value='" . $date . "'>" . $dato . ", " . $date . ", " . $ledigebilleter . " ledige plasser.</option>";
 						}
 						else {
 							echo "<option value='" . $date . "' disabled>" . $dato . ", " . $date . ", ingen ledige plasser.</option>";
@@ -178,17 +183,17 @@
 								<td><select name='bestiltdato'>";
 
 								foreach( mysqli_fetch_assoc($avgangdager) as $k => $v ) {
-									if ( isset($v) ) {
+									if ( isset($v) && $v != '' ) {
 										$datetranslation = DateTranslate($k);
 										$datestring = "next " . $datetranslation;
 										
 										DateOptions($con, $k, $datestring);
 
-										$datestring = "second next " . $datetranslation;
+										$datestring = "second " . $datetranslation;
 
 										DateOptions($con, $k, $datestring);
 
-										$datestring = "third next " . $datetranslation;
+										$datestring = "third " . $datetranslation;
 
 										DateOptions($con, $k, $datestring);
 									}
