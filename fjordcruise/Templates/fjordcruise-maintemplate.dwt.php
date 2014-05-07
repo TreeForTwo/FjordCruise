@@ -20,9 +20,9 @@
 	<script>
 		$( document ).ready(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
@@ -38,9 +38,9 @@
 
 		$( window ).resize(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 			}
 		);
 	</script>
@@ -53,6 +53,8 @@
 	$serverschema="maro0211";
 
 	?>
+
+
 
 	<nav>
 		<!-- Titlebar -->
@@ -81,6 +83,8 @@
 			</ul>
 		</div>
 	</nav>
+
+	<div id="backgroundgradient"></div>
 
 	<!-- TemplateBeginEditable name="EditRegion2" --><!-- TemplateEndEditable -->
 

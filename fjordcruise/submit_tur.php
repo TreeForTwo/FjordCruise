@@ -20,9 +20,9 @@
 	<script>
 		$( document ).ready(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
@@ -38,9 +38,9 @@
 
 		$( window ).resize(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 			}
 		);
 	</script>
@@ -53,6 +53,8 @@
 	$serverschema="maro0211";
 
 	?>
+
+	<div id="backgroundwrap"><div id="backgroundgradient">&nbsp;</div></div>
 
 	<nav>
 		<!-- Titlebar -->
@@ -77,7 +79,7 @@
 				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
-				<li id="paalogging"><a href="bruker.php" class="activepage">Bruker</a></li>
+				<li id="paalogging"><a href="bruker.php">Bruker</a></li>
 			</ul>
 		</div>
 	</nav>

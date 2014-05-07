@@ -20,9 +20,9 @@
 	<script>
 		$( document ).ready(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
@@ -38,9 +38,9 @@
 
 		$( window ).resize(
 			function () {
-				ResizeTitle()
-				CenterNav()
-				ScaleContent()
+				ResizeTitle();
+				CenterNav();
+				ScaleContent();
 			}
 		);
 	</script>
@@ -53,6 +53,8 @@
 	$serverschema="maro0211";
 
 	?>
+
+	<div id="backgroundwrap"><div id="backgroundgradient">&nbsp;</div></div>
 
 	<nav>
 		<!-- Titlebar -->
@@ -74,7 +76,7 @@
 		<div id="navwrap">
 			<ul>
 				<li><a href="aakrafjorden.php">Åkrafjorden</a></li>
-				<li><a href="cruise.php" class="activepage">Cruise</a></li>
+				<li><a href="cruise.php">Cruise</a></li>
 				<li><a href="aktiviteter.php">Aktiviteter</a></li>
 				<li><a href="omoss.php">Informasjon</a></li>
 				<li id="paalogging"><a href="bruker.php">Bruker</a></li>
@@ -113,6 +115,55 @@
 	      								 FROM fjordcruise_avganger
 	      								 WHERE fjordcruise_avganger.avgangid = $_POST[avgangid]");
 
+	      		function DateTranslate( string ) {
+	      			string = str_replace( "avgang", "", string );
+
+	      			if ( string == "mandag" ) {
+	      				return "monday"
+	      			}
+	      			elseif ( string == "tirsdag" ) {
+	      				return "tuesday"
+	      			}
+	      			elseif ( string == "onsdag" ) {
+	      				return "wednesday"
+	      			}
+	      			elseif ( string == "torsdag" ) {
+	      				return "thursday"
+	      			}
+	      			elseif ( string == "fredag" ) {
+	      				return "friday"
+	      			}
+	      			elseif ( string == "lordag" ) {
+	      				return "saturday"
+	      			}
+	      			elseif ( string == "sondag" ) {
+	      				return "sunday"
+	      			}
+	      		}
+
+	      		function DateOptions( $con, $k, $datestring ) {
+						$date = date("Y-m-d", strtotime($datestring) );
+						$dato = ucfirst( str_replace("avgang", "", $k ) );
+
+						$dato = str_replace( 'Lordag', 'Lørdag', $dato );
+	      				$dato = str_replace( 'Sondag', 'Søndag', $dato );
+
+
+						$dag = mysqli_query( $con, "SELECT SUM(fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter 
+												    FROM fjordcruise_bestillinger
+												    WHERE fjordcruise_bestillinger.bestiltdato = '" . $date . "'
+												    GROUP BY fjordcruise_bestillinger.bestiltdato" );
+
+						$ledigebilleter = 50 - mysqli_fetch_assoc($dag)['value_sum'];
+
+						if ( $ledigebilleter > 0 ) {
+							echo "<option value='" . $date . "'>" . $dato . ", " . $date . ", " . $ledigebilleter . " ledige plasser.</option>"
+						}
+						else {
+							echo "<option value='" . $date . "' disabled>" . $dato . ", " . $date . ", ingen ledige plasser.</option>";
+						}
+	      		}
+
 				echo "<form name='bestillingsform' action='submit_bestilling.php' method='post'>
 						<table id='bestillingstable'>
 							<tr>
@@ -126,35 +177,23 @@
 								<td><font class='b'>Dato:</font></td>
 								<td><select name='bestiltdato'>";
 
-								$datoer = mysqli_fetch_assoc($avgangdager);
+								foreach( mysqli_fetch_assoc($avgangdager) as $k => $v ) {
+									if ( isset($v) ) {
+										$datetranslation = DateTranslate($k);
+										$datestring = "next " . $datetranslation;
+										
+										DateOptions($con, $k, $datestring);
 
-				      			if ( isset( $datoer['avgangmandag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next monday") ) . "'>Mandag, " . date("Y-m-d", strtotime("next monday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
+										$datestring = "second next " . $datetranslation;
 
-				      			if ( isset( $datoer['avgangtirsdag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next tuesday") ) . "'>Tirsdag, " . date("Y-m-d", strtotime("next tuesday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
+										DateOptions($con, $k, $datestring);
 
-				      			if ( isset( $datoer['avgangonsdag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next wednesday") ) . "'>Onsdag, " . date("Y-m-d", strtotime("next wednesday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
+										$datestring = "third next " . $datetranslation;
 
-				      			if ( isset( $datoer['avgangtorsdag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next thursday") ) . "'>Torsdag, " . date("Y-m-d", strtotime("next thursday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
+										DateOptions($con, $k, $datestring);
+									}
+								}
 
-				      			if ( isset( $datoer['avgangfredag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next friday") ) . "'>Fredag, " . date("Y-m-d", strtotime("next friday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>";
-				      			}
-
-				      			if ( isset( $datoer['avganglordag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next saturday") ) . "'>Lørdag, " . date("Y-m-d", strtotime("next saturday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
-
-				      			if ( isset( $datoer['avgangsondag'] ) ) {
-				      				echo "<option value='" . date("Y-m-d", strtotime("next sunday") ) . "'>Søndag, " . date("Y-m-d", strtotime("next sunday") ) . ", " . rtrim( $_POST['avgangtid'], ":00" ) . "</option>"; 
-				      			}
 				echo 			     "</select></td>
 							</tr>
 							<tr>
