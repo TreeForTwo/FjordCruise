@@ -94,6 +94,42 @@
 			createCookie('previouspage', window.location.href);
 			window.location.replace('paalogging.php');
 		}
+
+		function ClampValues( bool ) {
+			selectedoption = $("[name='bestiltdato']").find(":selected");
+			date = selectedoption.val();
+			seats = Number( selectedoption.html().substr( selectedoption.html().lastIndexOf(", ") + 2, 2) );
+
+			barn = $("[name='antallbarnebilletter']");
+			voksne = $("[name='antallbilletter']");
+
+			maxbarn = seats - voksne.val();
+			maxvoksne = seats - barn.val();
+
+			barn.attr('max', maxbarn);
+			voksne.attr('max', maxvoksne);
+
+			// Remove the password warning
+			innerhtml = $("#bestillingstable tr:last td").html();
+			$("#bestillingstable tr:last td").html( innerhtml.substr(0, 90) );
+			window.passwordchecked = 0;
+
+			if ( bool ) {
+				barn.val(0);
+				voksne.val(0);
+			}
+		}
+
+		function SubmitBestilling() {
+			if ( $("[name='antallbarnebilletter']").val() + $("[name='antallbilletter']").val() > 0 ) {
+				document.forms['bestillingsform'].submit();
+			}
+			else if ( typeof window.passwordchecked !== 'undefined' ) {
+				window.passwordchecked = 1;
+
+				$("#bestillingstable tr:last td").append("   <font style='color:red;'>Du må bestille et antall billetter</font>");
+			}
+		}
 	</script>
 
 
@@ -162,7 +198,7 @@
 						$ledigebilleter = 50 - $lbarray[0];
 
 						if ( $ledigebilleter > 0 ) {
-							echo "<option value='" . $date . "'>" . $dato . ", " . $date . ", " . $ledigebilleter . " ledige plasser.</option>";
+							echo "<option value='" . $date . "'>" . $dato . ", " . $date . ", " . substr( $_POST['avgangtid'], 0, -3 ) . ", " . $ledigebilleter . " ledige plasser.</option>";
 						}
 						else {
 							echo "<option value='" . $date . "' disabled>" . $dato . ", " . $date . ", ingen ledige plasser.</option>";
@@ -180,7 +216,7 @@
 							</tr>
 							<tr>
 								<td><font class='b'>Dato:</font></td>
-								<td><select name='bestiltdato'>";
+								<td><select name='bestiltdato' onchange='ClampValues(true);'>";
 
 								foreach( mysqli_fetch_assoc($avgangdager) as $k => $v ) {
 									if ( isset($v) && $v != '' ) {
@@ -203,10 +239,13 @@
 							</tr>
 							<tr>
 								<td><font class='b'>Billetter</font></td>
-								<td>Voksne: <input type='number' name='antallbilletter'> Barn/Honnør: <input type='number' name='antallbarnebilletter'></td>
+								<td>Voksne: <input type='number' name='antallbilletter' style='width:50px;' value='0' min='0' onchange='ClampValues();'> Barn/Honnør: <input type='number' style='width:50px;' size='4' name='antallbarnebilletter' value='0' min='0' onchange='ClampValues();'></td>
 							</tr>
 							<tr>
-								<td colspan='2'><a href='#' onclick='document.forms['bestillingsform'].submit();'>Send inn bestilling!</a></td>
+								<td colspan='2' class='orderbutton'><a href='#' onclick='SubmitBestilling();'>Send inn bestilling!</a></td>
+								<input type='hidden' name='avgangid' value='" . $_POST['avgangid'] . "'>
+								<input type='hidden' name='bestilttid' value='" . $_POST['avgangtid'] . "'>
+								<input type='hidden' name='profilid' value='" . $_POST['profilid'] . "'>
 							</tr>
 						</table>
 					</form>";

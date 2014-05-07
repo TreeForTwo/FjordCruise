@@ -166,6 +166,13 @@
 		      				exit;
 		      			}
 
+		      			foreach( $_POST as $v ) {
+		      				if ( $v == "" ) {
+		      				echo "Du har ikke skrevet inn alle verdiene! <a href='#' onclick='history.go(-2);'>Gå tilbake og prøv igjen?</a>";
+		      				exit;		      					
+		      				}
+		      			}
+
 		      			$sqlsentence = "INSERT INTO fjordcruise_profil ( epost, profilnavn, passord, fornavn, etternavn, telefon )
 		      					    VALUES ( '" . $epost . "', '" . $brukernavn . "', '" . $passord . "', '" . $fornavn . "', '" . $etternavn . "', '" . $telefon . "' )";
 

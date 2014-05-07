@@ -130,9 +130,9 @@
 	      									<th colspan='3'>Administrasjon</th>
 	      								</tr>
 	      								<tr>
-	      									<td><a href='administrasjon.php?modus=turer'>Turer</a></td>
-	      									<td><a href='administrasjon.php?modus=avganger'>Avganger</a></td>
-	      									<td><a href='administrasjon.php?modus=reservasjoner'>Reservasjoner</a></td>
+	      									<td class='orderbutton'><a href='administrasjon.php?modus=turer'>Turer</a></td>
+	      									<td class='orderbutton'><a href='administrasjon.php?modus=avganger'>Avganger</a></td>
+	      									<td class='orderbutton'><a href='administrasjon.php?modus=reservasjoner'>Reservasjoner</a></td>
 	      								</tr>
 	      							</table>";
 	      					}
@@ -178,15 +178,15 @@
 	      									<td colspan='2'><input name='passord2' type='password'></td>
 	      								</tr>
 	      								<tr style='text-align:center;'>
-	      									<td colspan='3'><a href='#' onclick='eraseCookie(&#39;profil&#39);window.location.replace(&#39;index.php&#39);'>Logg av</a></td>
-	      									<td colspan='3'><a href='#' onclick='createCookie(&#39;previouspage&#39;,window.location.href);document.forms[&#39;omregistrasjonform&#39;].submit();'>Endre verdier</a></td>
+	      									<td colspan='3' class='orderbutton'><a href='#' onclick='eraseCookie(&#39;profil&#39);window.location.replace(&#39;index.php&#39);'>Logg av</a></td>
+	      									<td colspan='3' class='orderbutton'><a href='#' onclick='createCookie(&#39;previouspage&#39;,window.location.href);document.forms[&#39;omregistrasjonform&#39;].submit();'>Endre verdier</a></td>
 	      									<input type='hidden' name='omregistrasjon' value='1'>
 	      									<input type='hidden' name='profilid' value='" . $_GET['profil'] . "'>
 	      								</tr>
 	      							</table>
 	      						</form>";
 
-	      						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
+	      						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_bestillinger.bestilttid, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
 	      										FROM fjordcruise_bestillinger, fjordcruise_baater, fjordcruise_turer, fjordcruise_profil, fjordcruise_avganger
 	      										WHERE fjordcruise_bestillinger.avgangid = fjordcruise_avganger.avgangid
 	      										AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid
@@ -210,11 +210,21 @@
 		      										<td colspan='2'>" . $reservations['fornavn'] . " " . $reservations['etternavn'] . "</td>
 		      									</tr>
 		      									<tr>
-		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter</td>
-		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter</td>
+		      										<td>" . $reservations['antallbilletter'];
+		      											if ( $reservations['antallbilletter'] == 1 ) {
+		      												echo " voksenbillet";
+		      											}
+		      											else { echo " voksenbilleter"; }
+		      							echo 			"</td>
+		      										<td>" . $reservations['antallbarnebilletter'];
+		      											if ( $reservations['antallbarnebilletter'] == 1 ) {
+		      												echo " barnebillet";
+		      											}
+		      											else { echo " barnebilletter"; }
+		      							echo			"</td>
 		      									</tr>
 		      									<tr>
-		      										<td>" . $reservations['bestiltdato'] . "</td>
+		      										<td>" . $reservations['bestiltdato'] . "<br>" . substr( $reservations['bestilttid'], 0, -3 ) . "</td>
 		      										<td>" . $reservations['baatnavn'] . "</td>
 		      									</tr>
 		      								</table>";

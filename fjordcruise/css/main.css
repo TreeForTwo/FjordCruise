@@ -2,7 +2,7 @@
 
 /* Background */
 body {
-	background-color::#b5d0e5;
+	background:#b5d0e5;
 }
 
 #backgroundgradient {
@@ -181,6 +181,45 @@ li a.activepage {
 	display:block;
 }
 
+/* Submit buttons */
+.orderbutton {
+	background-color:rgba(63, 123, 255, 0.8);
+	text-align:center;
+	vertical-align:middle;
+}
+
+.orderbutton:hover {
+	background-color:rgba(43, 103, 235, 1);
+}
+
+.orderbutton:active {
+	background-color:rgba(63, 123, 255, 0.2);
+}
+
+.orderbutton a {
+	text-decoration:none;
+	display:block;
+
+	color: white;
+      text-shadow:
+   	-1px -1px 0 #000,  
+   	1px -1px 0 #000,
+    	-1px 1px 0 #000,
+     	1px 1px 0 #000;
+}
+
+/* Table General */
+table th {
+	background-color:rgba(0, 118, 2, 0.8);
+
+	color: white;
+      text-shadow:
+   	-1px -1px 0 #000,  
+   	1px -1px 0 #000,
+    	-1px 1px 0 #000,
+     	1px 1px 0 #000;
+}
+
 /* Cruise Tables */
 .cruisetable {
 	width:100%;
@@ -195,8 +234,6 @@ li a.activepage {
 
 .cruisetable th {
 	padding:8px;
-
-	background-color:rgba(0, 0, 0, 0.15);
 }
 
 .cruisetable td {
@@ -310,4 +347,22 @@ textarea {
 
 .avgangtabell td {
 	width:33%;
+}
+
+/* Bestillingstabell */
+#bestillingstable {
+	width:100%;
+
+	margin-bottom:15px;
+
+	border-collapse:collapse;
+}
+
+#bestillingstable td, #bestillingstable th {
+	border:2px solid #000;
+	padding:6px;
+}
+
+#bestillingstable td:first-child {
+	width:25%;
 }

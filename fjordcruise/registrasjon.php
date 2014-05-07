@@ -95,6 +95,19 @@
 			window.location.replace('bruker.php');
 		}
 
+		function SubmitRegistration() {
+			passord1 = $("[name='passord1']").val();
+			passord2 = $("[name='passord2']").val();
+
+			if ( passord1 == passord2 ) {
+				document.forms['registrationform'].submit()
+			}
+			else if ( !window.passwordchecked ) {
+				window.passwordchecked = 1;
+
+				$("#registrationform tr:last td").append("   <font style='color:red;'>Passordene stemmer ikke overens med hverandre!</font>");
+			}
+		}
 	</script>
 
 	<!-- InstanceEndEditable -->
@@ -138,7 +151,7 @@
 						<td><input type="password" name='passord2' required></td>
 					</tr>
 					<tr>
-						<td colspan='2'><a href='#' onclick="document.forms['registrationform'].submit();">Send inn registrasjon</a></td>
+						<td colspan='2' class='orderbutton'><a href='#' onclick="SubmitRegistration();">Send inn registrasjon</a></td>
 					</tr>
 			</form>
 

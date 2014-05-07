@@ -54,7 +54,7 @@
 
 	?>
 
-	<div id="backgroundwrap"><div id="backgroundgradient">&nbsp;</div></div>
+
 
 	<nav>
 		<!-- Titlebar -->
@@ -84,6 +84,8 @@
 		</div>
 	</nav>
 
+	<div id="backgroundgradient"></div>
+
 	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
 
 	<div id="contentwrap">
@@ -96,54 +98,32 @@
 		            		exit;
 		      		}
 
-		      		if ( isset( $_POST['endretur'] ) ) {
-		      			$previousvalues = mysqli_query($con, "SELECT * FROM fjordcruise_turer WHERE fjordcruise_turer.turid = '" . $_POST['turid'] . "'");
-		      			$row = mysqli_fetch_array($previousvalues);
+	      			$insertinto = "INSERT INTO fjordcruise_bestillinger ( ";
+	      			$values = "VALUES ( ";
 
-		      			// Manually comparing these is simpler than doing a foreach loop		      			
+	      			foreach( $_POST as $k => $v ) {
+	      				${$k} = mysqli_real_escape_string( $con, $v );
 
-		      			if ( isset( $_POST['turnavn'] ) && ( $row['turnavn'] != $_POST['turnavn'] ) ) {
-		      				$newarray['turnavn'] = mysqli_real_escape_string( $con, $_POST['turnavn'] );
-		      			}
+	      				$insertinto = $insertinto . $k . ", ";
+	      				$values = $values . "'" . ${$k} . "', ";
+	      			}
 
-		      			if ( isset( $_POST['turbeskrivelse'] ) && ( $row['turbeskrivelse'] != $_POST['turbeskrivelse'] ) ) {
-		      				$newarray['turbeskrivelse'] = mysqli_real_escape_string( $con, $_POST['turbeskrivelse'] );
-		      			}
+	      			$insertinto = rtrim($insertinto, ", , ") . " ) ";
+					$values = rtrim($values, ", , ") . " )";
 
-		      			foreach($newarray as $k => $v) {
-		      				if ( !mysqli_query($con, "UPDATE fjordcruise_turer
-		      					              SET $k = '" . $v . "'
-		      					              WHERE fjordcruise_turer.turid = " . $_POST['turid']) ) {
-		      					echo "Det har skjedd en feil! <a href='#' onclick='history.go(-1);'>Prøv igjen?</a>";
-		      				}
-		      			}
+					$sqlsentence = $insertinto . $values;
 
-		      			echo "Turen har nå blitt oppdatert! Du vil bli tatt tilbake til tursiden snart. <a href='administrasjon.php?modus=turer'>Klikk her hvis det tar lenger enn noen sekunder.</a>
+	      			if ( !mysqli_query($con, $sqlsentence) ) {
+	      				echo "Noe har gått galt! Vennligst send oss en e-post om dette";
+	      			}
+	      			else {
+	      				echo "Bestillingen din har blitt gjennomført. Du blir snart tatt med til brukersiden din, hvor du vil finne bekreftelse på dette. <a href='bruker.php'>Klikk her hvis det tar lenger enn noen sekunder.</a>
 		      				<script>
-		      					setTimeout( function() { window.location.replace( 'administrasjon.php?modus=turer' ) }, 5000 );
+		      					setTimeout( function() { window.location.replace( 'bruker.php' ) }, 5000 );
 		      				</script>";
+	      			}		      		
+		      	?>			
 
-		      		}
-		      		else {
-		      			$turnavn = mysqli_real_escape_string( $con, $_POST['turnavn'] );
-		      			$turbeskrivelse = mysqli_real_escape_string( $con, $_POST['turbeskrivelse'] );
-
-		      			$sqlsentence = "INSERT INTO fjordcruise_turer ( turnavn, turbeskrivelse )
-		      					    VALUES ( '" . $turnavn . "', '" . $turbeskrivelse . "' )";
-
-
-
-		      			if ( !mysqli_query($con, $sqlsentence) ) {
-		      				echo "Noe har gått galt! Vennligst send oss en e-post om dette";
-		      			}
-		      			else {
-		      				echo "Turen har nå blitt lagt til. Du blir snart tatt tilbake til tursiden. <a href='administrasjon.php?modus=turer'>Klikk her hvis det tar lenger enn noen sekunder.</a>
-			      				<script>
-			      					setTimeout( function() { window.location.replace( 'administrasjon.php?modus=turer' ) }, 5000 );
-			      				</script>";
-		      			}
-		      		}
-				?>
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>

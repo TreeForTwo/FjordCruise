@@ -138,7 +138,7 @@
 										<td><textarea class='turtextarea' name='turbeskrivelse'></textarea><script>$('.turtextarea').elastic();</script></td>
 									</tr>
 									<tr>
-										<td colspan='2'><a href='#' onclick='document.forms[&#39;turform&#39;].submit();'>Legg til tur</a></td>
+										<td colspan='2' class='orderbutton'><a href='#' onclick='document.forms[&#39;turform&#39;].submit();'>Legg til tur</a></td>
 									</tr>
 								</table>
 							</form>";
@@ -161,7 +161,7 @@
 											<td><textarea class='turtextarea' name='turbeskrivelse'>" . $row['turbeskrivelse'] . "</textarea></td>
 										</tr>
 										<tr>
-											<td colspan='3'><a href='#' onclick='document.forms[&#39;turform" . $row['turid'] . "&#39;].submit();'>Endre tur</a></td>
+											<td colspan='3' class='orderbutton'><a href='#' onclick='document.forms[&#39;turform" . $row['turid'] . "&#39;].submit();'>Endre tur</a></td>
 											<input type='hidden' name='endretur' value='1'>
 											<input type='hidden' name='turid' value='" . $row['turid'] . "'>
 										</tr>
@@ -190,11 +190,11 @@
 									</tr>
 									<tr>
 										<td><font class='b'>Pris:</font></td>
-										<td><input type='number' name='avgangpris'></td>
+										<td><input type='number' name='avgangpris' value='0' min='0'></td>
 									</tr>
 									<tr>
 										<td><font class='b'>Pris(Barn/Honnør):</font></td>
-										<td><input type='number' name='avgangprisbarn'></td>
+										<td><input type='number' name='avgangprisbarn' value='0' min='0'></td>
 									</tr>
 									<tr>
 										<td><font class='b'>Avgangdato:</font></td>
@@ -210,7 +210,7 @@
 									</tr>
 									<tr>
 										<td><font class='b'>Avgangstid:</font></td>
-										<td><input type='time' name='avgangtid'></td>
+										<td><input type='time' name='avgangtid' value='00:00:00'></td>
 									</tr>
 									<tr>
 										<td><font class='b'>Båt:</font></td>
@@ -223,7 +223,7 @@
 						echo			     "</select></td>
 									<tr>
 										<td><font class='b'>Deaktiver: </font><input type='checkbox' name='gjemtavgang' value='1'> (Gjem fra brukere)</td>
-										<td><a href='#' onclick='document.forms[&#39;avgangform&#39;].submit();'>Legg til avgang</a></td>
+										<td class='orderbutton'><a href='#' onclick='document.forms[&#39;avgangform&#39;].submit();'>Legg til avgang</a></td>
 									</tr>
 								</table>
 							</form>";
@@ -291,7 +291,7 @@
 										
 							echo		     "<tr>
 											<td colspan='3'>Deaktiver: <input type='checkbox' name='gjemtavgang' value='1'"; if ( $avgangrow['gjemtavgang'] == 1 ) { echo " checked"; } echo "> (Gjem fra brukere)</td>
-											<td colspan='3'><a href='#' onclick='document.forms[&#39;avgangform" . $avgangrow['avgangid'] . "&#39;].submit();'>Endre avgang</a></td>
+											<td colspan='3' class='orderbutton'><a href='#' onclick='document.forms[&#39;avgangform" . $avgangrow['avgangid'] . "&#39;].submit();'>Endre avgang</a></td>
 											<input type='hidden' name='avgangid' value='" . $avgangrow['avgangid'] . "'>
 											<input type='hidden' name='endreavgang' value='1'>
 										</tr>
@@ -300,7 +300,7 @@
 						}
 					}
 					else if ( $_GET['modus'] == "reservasjoner" ) {
-						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
+						$reservationsentence = "SELECT fjordcruise_bestillinger.antallbilletter, fjordcruise_bestillinger.antallbarnebilletter, fjordcruise_bestillinger.bestiltdato, fjordcruise_bestillinger.bestilttid, fjordcruise_turer.turnavn, fjordcruise_baater.baatnavn, fjordcruise_profil.fornavn, fjordcruise_profil.etternavn
 	      										FROM fjordcruise_bestillinger, fjordcruise_baater, fjordcruise_turer, fjordcruise_profil, fjordcruise_avganger
 	      										WHERE fjordcruise_bestillinger.avgangid = fjordcruise_avganger.avgangid
 	      										AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid
@@ -322,11 +322,21 @@
 		      										<td colspan='2'>" . $reservations['fornavn'] . " " . $reservations['etternavn'] . "</td>
 		      									</tr>
 		      									<tr>
-		      										<td>" . $reservations['antallbilletter'] . " voksenbilletter</td>
-		      										<td>" . $reservations['antallbarnebilletter'] . " barnebilletter</td>
+		      										<td>" . $reservations['antallbilletter'];
+		      											if ( $reservations['antallbilletter'] == 1 ) {
+		      												echo " voksenbillet";
+		      											}
+		      											else { echo " voksenbilletter"; }
+		      							echo			"</td>
+		      										<td>" . $reservations['antallbarnebilletter'];
+		      											if ( $reservations['antallbarnebilletter'] == 1 ) {
+		      												echo " barnebillet";
+		      											}
+		      											else { echo " barnebilletter"; }
+		      							echo			"</td>
 		      									</tr>
 		      									<tr>
-		      										<td>" . $reservations['bestiltdato'] . "</td>
+		      										<td>" . $reservations['bestiltdato'] . "<br>" . substr( $reservations['bestilttid'], 0, -3 ) . "</td>
 		      										<td>" . $reservations['baatnavn'] . "</td>
 		      									</tr>
 		      								</table>";
