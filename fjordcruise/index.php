@@ -23,6 +23,7 @@
 				ResizeTitle();
 				CenterNav();
 				ScaleContent();
+				ScaleIndex();
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
@@ -41,6 +42,7 @@
 				ResizeTitle();
 				CenterNav();
 				ScaleContent();
+				ScaleIndex();
 			}
 		);
 	</script>
@@ -84,22 +86,23 @@
 		</div>
 	</nav>
 
-	<!-- InstanceBeginEditable name="EditRegion2" --><!-- InstanceEndEditable -->
+	<!-- InstanceBeginEditable name="EditRegion2" -->
+	<div id="indextext">
+		Velkommen til<br><br>
+		<font>FjordCruise!</font>
+	</div>
 
-	<div id="contentwrap">
+	<div id="indeximage">
+		<img src='img/langfoss.jpg' alt='Langfoss'>
+	</div>
+
+
+	<!-- InstanceEndEditable -->
+
+	<div id="contentwrap" style='display:none;'>
 		<span id="content">
 			<br><br>
-			<!-- InstanceBeginEditable name="EditRegion3" -->
-
-			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc congue nisi non nulla dapibus ullamcorper. Praesent sed tellus sit amet est tristique malesuada. Suspendisse a lacus dictum libero dignissim aliquam sed ut mauris. Sed ut cursus quam, vel facilisis nulla. Nulla nec velit commodo ante volutpat egestas. Suspendisse arcu turpis, ultricies vitae elit id, consectetur pretium erat. Vestibulum in dignissim lectus. Ut viverra in urna eget semper. Aliquam tempus est felis, quis posuere tortor eleifend at. Mauris vehicula ac nunc ac rutrum. Aenean pharetra lectus tincidunt, sagittis eros vel, feugiat libero.
-
-			Maecenas congue ligula quis interdum consequat. Etiam tempus mi ut purus dignissim, ac hendrerit orci placerat. Donec sed justo rhoncus, tincidunt mi luctus, dapibus mauris. Aliquam posuere in lorem eget ultrices. Nullam molestie luctus massa a interdum. Maecenas imperdiet eleifend libero, iaculis volutpat odio cursus vel. Nullam dapibus eros iaculis, aliquam neque ac, scelerisque urna. Nam pulvinar id lectus ac consequat. Pellentesque iaculis pellentesque sapien. Pellentesque sollicitudin tincidunt semper. Morbi accumsan consectetur dolor non ultricies. Morbi ut faucibus ipsum. Nullam at scelerisque nulla.
-
-			Quisque sodales turpis id convallis fringilla. Integer at convallis mauris. Integer sit amet gravida risus. Nam pulvinar imperdiet nulla dapibus molestie. Cras id fermentum odio, non lobortis urna. Nunc egestas, dui id vestibulum porta, metus tortor pellentesque metus, sit amet luctus nisi elit eget lacus. Nunc nec pellentesque leo. Morbi condimentum dictum consectetur. Sed tincidunt, lorem vitae sollicitudin convallis, leo urna molestie mauris, eu cursus ipsum mi et enim. Cras id dui luctus, pharetra arcu vitae, sagittis ante. Nullam rutrum sem bibendum massa dapibus commodo. Sed sodales orci ac urna sagittis ornare. Fusce convallis sagittis blandit.
-
-			Etiam imperdiet mauris sit amet massa ullamcorper mattis. Quisque in nisl in urna elementum tempor congue vitae dui. Nulla ac mattis risus. Vivamus ultrices odio vel fermentum dignissim. Aliquam erat volutpat. Duis sollicitudin, eros ut suscipit elementum, augue eros tempor nibh, in consequat nisl nisi eu justo. Etiam metus leo, porta eu urna quis, rutrum iaculis odio. Nullam dapibus lorem et consectetur viverra. Integer ac dignissim lorem.
-
-			Morbi sodales nunc arcu, nec suscipit erat lacinia sed. Donec quis dui commodo, lacinia lorem vitae, congue metus. Donec euismod erat at quam eleifend vestibulum. Donec vel sagittis leo. Vivamus venenatis pellentesque dolor eu lobortis. Nam nec ipsum et nulla tincidunt egestas. Mauris blandit consequat bibendum. Suspendisse potenti. Pellentesque non est at lectus accumsan sodales et a velit. Quisque nec felis et lectus rhoncus ultricies. Proin vitae ipsum id augue rhoncus pretium ut quis purus. Vivamus sagittis rutrum eros vitae malesuada. Integer feugiat odio sodales sem luctus, at rhoncus sem laoreet. Sed congue sem diam, eu commodo eros vehicula gravida.f<!-- InstanceEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" --><!-- InstanceEndEditable -->
 		</span>
 	</div>
 

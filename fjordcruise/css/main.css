@@ -1,4 +1,5 @@
 @import url("reset.css");
+@import url("flexslider.css");
 
 /* Background */
 body {
@@ -179,6 +180,37 @@ li a.activepage {
 
 #content {
 	display:block;
+}
+
+/* Index Page */
+#indeximg {
+	width:100%;
+}
+
+#indextext {
+	position:absolute;
+
+	color: cyan;
+      text-shadow:
+   	-1px -1px 0 #000,  
+   	1px -1px 0 #000,
+    	-1px 1px 0 #000,
+     	1px 1px 0 #000;
+
+	top:250px;
+	width:660px;
+	font-size:50px;
+	z-index:5;
+}
+
+#indextext font {
+	float:right;
+	font-size:70px;
+}
+
+/* Slideshow */
+.fjordslideshow img {
+	width:100%;
 }
 
 /* Submit buttons */

@@ -18,11 +18,20 @@
 	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
 	<script>
+		function ResizeYT() {
+			width = $("#content").width();
+			$("#YT").width( width );
+
+			$("#YT").height( width / 16 * 9);
+
+		}
+
 		$( document ).ready(
 			function () {
 				ResizeTitle();
 				CenterNav();
 				ScaleContent();
+				ResizeYT();
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
@@ -41,6 +50,7 @@
 				ResizeTitle();
 				CenterNav();
 				ScaleContent();
+				ResizeYT();
 			}
 		);
 	</script>
@@ -89,7 +99,14 @@
 	<div id="contentwrap">
 		<span id="content">
 			<br><br>
-			<!-- InstanceBeginEditable name="EditRegion3" --><!-- InstanceEndEditable -->
+			<!-- InstanceBeginEditable name="EditRegion3" -->
+				<font class='b'>Våres anbefalte aktivitet</font><br>
+				Har du lyst på mer spenning i hverdagen? Vi tilbyr strikkhopp fra Trolljuv Bro, 134m rett ned, og så opp igjen!
+				Dette er en uforglemmelig opplevelse som kan både være den beste slutten på et langt cruise, og en opplevelse for seg selv. For å bestille, <a href="cruise.php">se listen over cruise her!</a>
+				<br><br>
+				Er du enda ikke overbevist?<br>
+				<iframe id="YT" src="//www.youtube.com/embed/JDHdXlbgOFQ" frameborder="0" allowfullscreen></iframe>
+			<!-- InstanceEndEditable -->
 		</span>
 	</div>
 

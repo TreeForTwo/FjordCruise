@@ -17,6 +17,7 @@
 	<script src="js/jquery.flowtype.js"></script>
 	<script src="js/date-nb-NO.js"></script>
 	<script src="js/cookies.js"></script>
+	<script src='js/jquery.flexslider.js'></script>
 	<script>
 		$( document ).ready(
 			function () {
@@ -26,6 +27,7 @@
 				/* Resizing is handled within these scripts, don't repeat them */
 				$("#titlecenter").fitText(1, { minFontSize:'60px', maxFontSize:'80px' } )
 				$("#content").flowtype( { fontRatio: 42, maxFont: 21 });
+				$(".fjordslideshow").flexslider( { controlNav: false} );
 
 				/* Mark current page button as active */
 				$("[href]").each(function() {
@@ -90,8 +92,24 @@
 		<span id="content">
 			<br><br>
 			<!-- InstanceBeginEditable name="EditRegion3" -->
-			Velkommen til Åkrafjorden!<br>
-			Åkrafjorden 
+			<font class='b'>Velkommen til Åkrafjorden!</font><br>
+			Åkrafjorden er et utsøkt stykke Norge, med praktful natur og utsikt.
+			Her finner man Langfoss, en av verdens ti vakreste fosser, som fosser ned fjellsiden inn i fjorden.
+			E-134 går langs den ene siden av fjorden, og i nærheten kan man oppleve de veggløse gårdene og se norske tradisjoner med sine egne øyne. 
+			Fjordcruise tilbyr deg å oppleve Åkrafjorden og alle aktivitetene langs den 25km lange veien. Klikk i vei!<br><br>
+
+			<a href='http://www.panoramas.no/Akrafjorden/index.html' target='_blank'>Se Langfossen og Åkrafjorden i 360 graders panorama!</a>
+			<br>
+			<div class="fjordslideshow">
+				<ul class='slides'>
+					<li><img src='img/fjord/1.jpg' alt='aakrafjorden'></li>
+					<li><img src='img/fjord/2.jpg' alt='aakrafjorden'></li>
+					<li><img src='img/fjord/3.jpg' alt='aakrafjorden'></li>
+					<li><img src='img/fjord/4.jpg' alt='aakrafjorden'></li>
+					<li><img src='img/fjord/5.jpg' alt='aakrafjorden'></li>
+				</ul>
+			</div>
+
 			<!-- InstanceEndEditable -->
 		</span>
 	</div>

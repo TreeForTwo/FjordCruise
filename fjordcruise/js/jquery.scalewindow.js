@@ -20,3 +20,14 @@ function ScaleContent() {
 	$("#contentwrap").width(wrapwidth);
 	$("#content").width( wrapwidth );
 }
+
+function ScaleIndex() {
+	if ( $("#indeximage") ) {
+		$("#indeximage img").width( $("nav").width() );
+		$("#indeximage img").height( $(window).height() );
+		$("#indeximage").width( $("nav").width() );
+		$("#indeximage").height( $(window).height() );
+
+		$("#indextext").css("left", ( $("nav").width() - $("#indextext").width() ) / 2 );
+	}
+}
