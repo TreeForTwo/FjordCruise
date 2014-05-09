@@ -18,7 +18,13 @@ function ScaleContent() {
 	var newwidth = $(window).width();
 	var wrapwidth = Math.max( $(window).width() * 0.15 + 600, 700 )
 	$("#contentwrap").width(wrapwidth);
-	$("#content").width( wrapwidth );
+	$("#content").width( wrapwidth ); 
+
+	/* Just do the background resizing here */
+	var background = $("#backgroundgradient");
+	var backgroundheight = Math.min( $(window).height(), 600 );
+	background.height(backgroundheight);
+	$("#backgroundwrap").height(backgroundheight);
 }
 
 function ScaleIndex() {
