@@ -24,7 +24,6 @@ function ScaleContent() {
 	var background = $("#backgroundgradient");
 	var backgroundheight = Math.min( $(window).height(), 600 );
 	background.height(backgroundheight);
-	$("#backgroundwrap").height(backgroundheight);
 }
 
 function ScaleIndex() {
