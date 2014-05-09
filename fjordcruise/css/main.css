@@ -252,6 +252,18 @@ table th {
      	1px 1px 0 #000;
 }
 
+/* Titletable */
+.titletable {
+	width:100%;
+	border-collapse:collapse;
+	margin-bottom:15px;
+}
+
+.titletable th {
+	padding:6px;
+	border:2px solid #000;
+}
+
 /* Cruise Tables */
 .cruisetable {
 	width:100%;

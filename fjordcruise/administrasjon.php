@@ -145,7 +145,7 @@
 
 						$turerresult = mysqli_query( $con, "SELECT * FROM fjordcruise_turer" );
 
-						if ( mysqli_num_rows($turerresult) > 0 ){ echo "<div class='c'><font class='b'>Se og endre turer:</font></div><br>";}
+						if ( mysqli_num_rows($turerresult) > 0 ){ echo "<table class='titletable'><tr><th>Se og endre turer</th></tr></table>";}
 
 						while( $row = mysqli_fetch_array( $turerresult ) ) {
 							echo "<form id='turform" . $row['turid'] . "' action='submit_tur.php' method='post'>
@@ -230,7 +230,7 @@
 
 						$avgangresult = mysqli_query( $con, "SELECT * FROM fjordcruise_avganger, fjordcruise_turer, fjordcruise_baater WHERE fjordcruise_avganger.turid = fjordcruise_turer.turid AND fjordcruise_avganger.baatid = fjordcruise_baater.baatid" );
 
-						if ( mysqli_num_rows($avgangresult) > 0 ){ echo "<div class='c'><font class='b'>Se og endre avganger:</font></div><br>";}
+						if ( mysqli_num_rows($avgangresult) > 0 ){ echo "<table class='titletable'><tr><th>Se og endre avganger:</th></tr></table>";}
 
 						while ( $avgangrow = mysqli_fetch_array( $avgangresult ) ) {
 							$turerresultcopies = mysqli_query( $con, "SELECT fjordcruise_turer.turid, fjordcruise_turer.turnavn FROM fjordcruise_turer" );
@@ -311,7 +311,7 @@
 	      						$reservationarray = mysqli_query($con, $reservationsentence);
 
 	      						if ( mysqli_num_rows($reservationarray) ) {
-		      						echo "<h1>Reservasjoner</h1><div id='reservationwrap'>";
+		      						echo "<table class='titletable'><tr><th>Se reservasjoner</th></tr></table><div id='reservationwrap'>";
 
 		      						while( $reservations = mysqli_fetch_array($reservationarray) ) {
 		      							echo "<table class='reservationtable'>
