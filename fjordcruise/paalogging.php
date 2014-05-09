@@ -47,9 +47,9 @@
 
 	<?php
 
-	$serverhost="p:localhost";
-	$serveruser="root";
-	$serverpass="";
+	$serverhost="p:elevweb.akershus-fk.no";
+	$serveruser="maro0211";
+	$serverpass="FjGhrtyu";
 	$serverschema="maro0211";
 
 	?>
@@ -105,7 +105,7 @@
 			<!-- InstanceBeginEditable name="EditRegion3" -->
 
 			<form action='submit_paalogging.php' method='post'>
-				<font class='b'>Brukernavn:</font><br>
+				<font class='b'>Brukernavn/E-post:</font><br>
 				<input type='text' name='brukernavn'><br>
 				<font class='b'>Passord:</font><br>
 				<input type='password' name='passord'><br>

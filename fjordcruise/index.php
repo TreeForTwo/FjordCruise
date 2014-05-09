@@ -49,9 +49,9 @@
 
 	<?php
 
-	$serverhost="p:localhost";
-	$serveruser="root";
-	$serverpass="";
+	$serverhost="p:elevweb.akershus-fk.no";
+	$serveruser="maro0211";
+	$serverpass="FjGhrtyu";
 	$serverschema="maro0211";
 
 	?>
